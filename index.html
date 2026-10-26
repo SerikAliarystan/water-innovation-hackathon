@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ru" data-lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title data-i18n="meta.title">Water Innovation Hackathon — Инновации ради каждой капли</title>
+  <meta name="description" data-i18n-attr="content:meta.desc" content="Хакатон по водным ресурсам Казахстана. Онлайн-разработка 22–26 ноября, Demo Day 28 ноября в Астане. Приём заявок до 18 ноября 2026." />
+  <meta name="theme-color" content="#03141a" />
+  <meta property="og:title" content="Water Innovation Hackathon — Innovate for Every Drop" />
+  <meta property="og:description" content="6–28 ноября 2026 · Астана. Команды 3–5 человек, онлайн-разработка, финал в Астане." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+  <script>
+    // Язык выставляем до отрисовки, чтобы не было «мигания» другого языка
+    (function () {
+      var l = null;
+      try { l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('wih-lang'); } catch (e) {}
+      if (l !== 'ru' && l !== 'kk' && l !== 'en') l = 'ru';
+      document.documentElement.lang = l;
+      document.documentElement.dataset.lang = l;
+    })();
+  </script>
+</head>
+<body>
+  <!-- Иконки: линейные, единый стиль, мотив капли -->
+  <svg width="0" height="0" class="sr-only" aria-hidden="true" focusable="false">
+    <defs>
+      <path id="drop-outline" d="M12 2.6c3.7 4.4 6.6 8 6.6 11.6a6.6 6.6 0 0 1-13.2 0c0-3.6 2.9-7.2 6.6-11.6z" />
+    </defs>
+    <symbol id="i-prize" viewBox="0 0 24 24"><use href="#drop-outline" /><path d="M12 10.6l1.1 2.2 2.4.35-1.75 1.7.4 2.4L12 16.1l-2.15 1.15.4-2.4-1.75-1.7 2.4-.35z" /></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><use href="#drop-outline" /><circle cx="12" cy="14.3" r="3.3" /><circle cx="12" cy="14.3" r="0.9" /></symbol>
+    <symbol id="i-experts" viewBox="0 0 24 24"><use href="#drop-outline" /><circle cx="12" cy="12.4" r="1.7" /><path d="M8.9 17.6c.5-1.7 1.6-2.6 3.1-2.6s2.6.9 3.1 2.6" /></symbol>
+    <symbol id="i-stage" viewBox="0 0 24 24"><use href="#drop-outline" /><rect x="10.6" y="10.2" width="2.8" height="4.6" rx="1.4" /><path d="M9.2 13.8a2.8 2.8 0 0 0 5.6 0M12 16.6v1.4" /></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><use href="#drop-outline" /><circle cx="12" cy="14.3" r="3.6" /><path d="M8.4 14.3h7.2M12 10.7c1.1 1.1 1.5 2.3 1.5 3.6s-.4 2.5-1.5 3.6c-1.1-1.1-1.5-2.3-1.5-3.6s.4-2.5 1.5-3.6z" /></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><use href="#drop-outline" /><path d="M12 11l3.6 1.8L12 14.6l-3.6-1.8zM8.4 15l3.6 1.8 3.6-1.8" /></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><use href="#drop-outline" /><path d="M10.2 12.3l-2 2 2 2M13.8 12.3l2 2-2 2" /></symbol>
+    <symbol id="i-data" viewBox="0 0 24 24"><use href="#drop-outline" /><path d="M8.6 16.6l2.2-2.4 1.7 1.3 3-3.4" /><circle cx="15.5" cy="12.1" r=".5" /></symbol>
+    <symbol id="i-student" viewBox="0 0 24 24"><use href="#drop-outline" /><path d="M8.2 13.2L12 11.4l3.8 1.8L12 15zM9.8 14v1.8c.6.6 1.3.9 2.2.9s1.6-.3 2.2-.9V14" /></symbol>
+    <symbol id="i-wave" viewBox="0 0 24 24"><use href="#drop-outline" /><path d="M8.2 13.2c1.3-1 2.5-1 3.8 0s2.5 1 3.8 0M8.2 16c1.3-1 2.5-1 3.8 0s2.5 1 3.8 0" /></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6" /></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12" /></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-8 8M18 14v5H5V6h5" /></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="M4 7l8 6 8-6" /></symbol>
+    <symbol id="i-tg" viewBox="0 0 24 24"><path d="M20.5 4.5L3.5 11l5.6 2 2 6 3-3.6 4.6 3.4z M9.1 13l8.4-6" /></symbol>
+    <symbol id="logo-mark" viewBox="0 0 40 40">
+      <defs>
+        <linearGradient id="lg-mark" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#9ff3ff" />
+          <stop offset="1" stop-color="#00cf60" />
+        </linearGradient>
+      </defs>
+      <path d="M20 3.5c6.3 7.4 11.2 13.5 11.2 19.6a11.2 11.2 0 0 1-22.4 0C8.8 17 13.7 10.9 20 3.5z" fill="url(#lg-mark)" />
+      <path d="M13.6 24.4c2.1-1.6 4.3-1.6 6.4 0s4.3 1.6 6.4 0" fill="none" stroke="#03141a" stroke-width="2" stroke-linecap="round" />
+      <path d="M15.6 28.6c1.5-1.1 3-1.1 4.4 0s3 1.1 4.4 0" fill="none" stroke="#03141a" stroke-width="2" stroke-linecap="round" opacity=".6" />
+    </symbol>
+  </svg>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Перейти к содержанию</a>
+
+  <!-- 1. Шапка -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+      <a class="logo" href="#top" aria-label="Water Innovation Hackathon">
+        <svg class="logo__mark" aria-hidden="true"><use href="#logo-mark" /></svg>
+        <span class="logo__text"><b>Water Innovation</b><span>Hackathon</span></span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="#why" data-nav="why" data-i18n="nav.why">Почему участвовать</a>
+        <a href="#program" data-nav="program" data-i18n="nav.program">Программа</a>
+        <a href="#who" data-nav="who" data-i18n="nav.who">Участники</a>
+        <a href="#partners" data-nav="partners" data-i18n="nav.partners">Партнёры</a>
+        <a href="#faq" data-nav="faq" data-i18n="nav.faq">FAQ</a>
+      </nav>
+      <div class="header__actions">
+        <div class="lang" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Язык сайта">
+          <button type="button" data-lang-btn="ru" lang="ru">RU</button>
+          <button type="button" data-lang-btn="kk" lang="kk">ҚАЗ</button>
+          <button type="button" data-lang-btn="en" lang="en">EN</button>
+        </div>
+        <button type="button" class="btn btn--primary btn--sm header__cta" data-register><span data-register-label data-i18n="cta.register">Зарегистрироваться</span></button>
+        <button type="button" class="burger" aria-expanded="false" aria-controls="mobile-menu" data-i18n-attr="aria-label:nav.menu" aria-label="Меню"><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Мобильное меню на весь экран -->
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav class="mobile-menu__nav" aria-label="Mobile">
+      <a href="#why" data-i18n="nav.why">Почему участвовать</a>
+      <a href="#program" data-i18n="nav.program">Программа</a>
+      <a href="#who" data-i18n="nav.who">Участники</a>
+      <a href="#partners" data-i18n="nav.partners">Партнёры</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      <div class="lang lang--lg" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Язык сайта">
+        <button type="button" data-lang-btn="ru" lang="ru">RU</button>
+        <button type="button" data-lang-btn="kk" lang="kk">ҚАЗ</button>
+        <button type="button" data-lang-btn="en" lang="en">EN</button>
+      </div>
+      <button type="button" class="btn btn--primary btn--block" data-register><span data-register-label data-i18n="cta.register">Зарегистрироваться</span></button>
+    </div>
+  </div>
+
+  <!-- Шкала прогресса -->
+  <nav class="rail" data-i18n-attr="aria-label:rail.label" aria-label="Навигация по странице">
+    <div class="rail__track"><div class="rail__fill"></div></div>
+    <ol class="rail__marks"></ol>
+  </nav>
+  <div class="topbar" aria-hidden="true"><div class="topbar__fill"></div></div>
+
+  <div class="cursor" aria-hidden="true"></div>
+
+  <main id="main">
+    <!-- 2. Основной баннер -->
+    <section class="hero" id="top" data-section="hero" data-rail="rail.hero">
+      <div class="hero__water" aria-hidden="true">
+        <canvas class="hero__canvas"></canvas>
+        <div class="hero__fallback"></div>
+        <div class="hero__vignette"></div>
+      </div>
+
+      <div class="hero__inner container">
+        <div class="hero__copy">
+          <p class="eyebrow eyebrow--mono hero__eyebrow" data-i18n="hero.eyebrow">Water Innovation Hackathon · 6–28 ноября 2026 · Астана</p>
+          <h1 class="hero__title" lang="en">
+            <span class="line"><span>Innovate</span></span>
+            <span class="line"><span>for Every</span></span>
+            <span class="line"><span>Drop<span class="hero__dot" aria-hidden="true"></span></span></span>
+            <span class="sr-only">.</span>
+          </h1>
+          <p class="hero__slogan" data-i18n="hero.slogan">Инновации ради каждой капли</p>
+          <p class="hero__lead" data-i18n="hero.lead">Онлайн-разработка, команды по 3–5 человек, финал в Астане. Подай заявку до 18 ноября и создай решение, которое сохранит воду для всех.</p>
+          <div class="hero__actions">
+            <button type="button" class="btn btn--primary btn--lg" data-register id="hero-cta"><span data-register-label data-i18n="cta.register">Зарегистрироваться</span></button>
+            <a class="link-more" href="#program"><span data-i18n="cta.more">Узнать подробнее</span> <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+          </div>
+          <p class="hero__deadline mono"><span class="pulse-dot" aria-hidden="true"></span><span data-i18n="hero.deadline">Приём заявок до 18 ноября, 23:59 (Астана, UTC+5)</span></p>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="drop-hero">
+            <svg class="drop-hero__svg" viewBox="0 0 320 420">
+              <defs>
+                <linearGradient id="dh-fill" x1="0.2" y1="0" x2="0.8" y2="1">
+                  <stop offset="0" stop-color="#c9f7ff" stop-opacity=".9" />
+                  <stop offset=".45" stop-color="#23c5ff" stop-opacity=".55" />
+                  <stop offset="1" stop-color="#00cf60" stop-opacity=".75" />
+                </linearGradient>
+                <radialGradient id="dh-glow" cx=".35" cy=".3" r=".7">
+                  <stop offset="0" stop-color="#ffffff" stop-opacity=".55" />
+                  <stop offset=".5" stop-color="#ffffff" stop-opacity="0" />
+                </radialGradient>
+                <linearGradient id="dh-edge" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#ffffff" stop-opacity=".9" />
+                  <stop offset=".5" stop-color="#ffffff" stop-opacity=".15" />
+                  <stop offset="1" stop-color="#1ae276" stop-opacity=".8" />
+                </linearGradient>
+                <clipPath id="dh-clip">
+                  <path d="M160 14C222 96 290 170 290 262a130 130 0 0 1-260 0C30 170 98 96 160 14z" />
+                </clipPath>
+              </defs>
+              <path class="drop-hero__body" d="M160 14C222 96 290 170 290 262a130 130 0 0 1-260 0C30 170 98 96 160 14z" fill="url(#dh-fill)" />
+              <g clip-path="url(#dh-clip)" class="drop-hero__data">
+                <!-- сетка -->
+                <g class="dh-grid" stroke="#e8fdff" stroke-opacity=".14" stroke-width="1">
+                  <path d="M0 140H320M0 180H320M0 220H320M0 260H320M0 300H320M0 340H320M0 380H320" />
+                  <path d="M60 0V420M100 0V420M140 0V420M180 0V420M220 0V420M260 0V420" />
+                </g>
+                <!-- топографические контуры региона -->
+                <g class="dh-contours" fill="none" stroke="#f2feff" stroke-width="1.3">
+                  <path d="M58 236c18-26 52-30 74-20s40 4 58-10 52-8 66 14 4 52-22 62-44 30-78 26-60-6-82-24-34-26-16-48z" stroke-opacity=".55" />
+                  <path d="M84 240c14-16 38-18 54-10s32 2 46-6 36-4 44 10-2 34-20 40-32 18-56 16-40-6-56-18-24-18-12-32z" stroke-opacity=".45" />
+                  <path d="M112 244c10-8 24-8 34-4s20 0 30-2 20 0 24 8-4 18-14 20-20 8-34 6-24-4-32-10-14-12-8-18z" stroke-opacity=".38" />
+                </g>
+                <!-- график -->
+                <polyline class="dh-chart" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"
+                  points="40,342 70,330 96,336 122,312 150,320 176,292 204,300 232,270 262,278 290,250" />
+                <path class="dh-area" d="M40 342L70 330 96 336 122 312 150 320 176 292 204 300 232 270 262 278 290 250V420H40z" fill="#ffffff" fill-opacity=".08" />
+                <!-- сенсоры -->
+                <g class="dh-sensors" fill="#ffffff">
+                  <circle cx="122" cy="222" r="4" /><circle cx="196" cy="208" r="4" /><circle cx="236" cy="262" r="4" />
+                  <circle cx="92" cy="270" r="4" /><circle cx="168" cy="286" r="4" />
+                </g>
+                <g class="dh-pings" fill="none" stroke="#ffffff" stroke-width="1.5">
+                  <circle cx="122" cy="222" r="4" /><circle cx="196" cy="208" r="4" style="--d:.7s" /><circle cx="236" cy="262" r="4" style="--d:1.4s" />
+                  <circle cx="92" cy="270" r="4" style="--d:2.1s" /><circle cx="168" cy="286" r="4" style="--d:.35s" />
+                </g>
+                <g class="dh-links" stroke="#ffffff" stroke-opacity=".35" stroke-width="1" stroke-dasharray="3 4">
+                  <path d="M122 222L196 208L236 262L168 286L92 270Z" fill="none" />
+                </g>
+                <g class="dh-labels mono" fill="#ffffff" fill-opacity=".85" font-size="10" font-family="JetBrains Mono, monospace">
+                  <text x="58" y="208">Q 2.4 m³/s</text>
+                  <text x="206" y="198">pH 7.2</text>
+                  <text x="212" y="246">−18% loss</text>
+                </g>
+              </g>
+              <path d="M160 14C222 96 290 170 290 262a130 130 0 0 1-260 0C30 170 98 96 160 14z" fill="url(#dh-glow)" />
+              <path d="M160 14C222 96 290 170 290 262a130 130 0 0 1-260 0C30 170 98 96 160 14z" fill="none" stroke="url(#dh-edge)" stroke-width="1.6" />
+              <path d="M92 168c-14 24-22 46-22 70" fill="none" stroke="#ffffff" stroke-opacity=".7" stroke-width="5" stroke-linecap="round" />
+            </svg>
+            <div class="drop-hero__shadow"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__bottom container">
+        <ul class="stats" role="list">
+          <li class="stat glass"><span class="stat__num mono" data-prize>[X]</span><span class="stat__label" data-i18n="hero.stat.prize">призовой фонд</span></li>
+          <li class="stat glass"><span class="stat__num mono">10</span><span class="stat__label" data-i18n="hero.stat.finalists">финалистов</span></li>
+          <li class="stat glass"><span class="stat__num mono">5</span><span class="stat__label" data-i18n="hero.stat.days">дней разработки</span></li>
+        </ul>
+      </div>
+
+      <div class="marquee" aria-label="Направления">
+        <div class="marquee__track">
+          <ul class="marquee__list" role="list">
+            <li data-i18n="track.1">Умный учёт воды</li>
+            <li data-i18n="track.2">Прогноз паводков и засух</li>
+            <li data-i18n="track.3">Качество воды</li>
+            <li data-i18n="track.4">Потери в сетях</li>
+            <li data-i18n="track.5">Умное орошение</li>
+            <li data-i18n="track.6">Спутниковый мониторинг</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Обратный отсчёт -->
+    <section class="section countdown-sec" id="countdown" data-section="countdown" data-rail="rail.countdown">
+      <div class="depth" aria-hidden="true"><div class="depth__drops"></div></div>
+      <div class="container countdown-sec__inner">
+        <p class="eyebrow eyebrow--mono reveal" data-stage-label>До закрытия приёма заявок</p>
+        <h2 class="h2 reveal" data-i18n="cd.title">Каждая секунда на счету. Как и каждая капля.</h2>
+        <div class="timer glass reveal" data-timer role="timer" aria-live="off"></div>
+        <p class="stage-note reveal" data-stage-note></p>
+        <ul class="facts reveal" role="list">
+          <li><span class="facts__drop" aria-hidden="true"></span><span data-i18n="cd.fact1">Приём заявок до 18 ноября, 23:59 (Астана, UTC+5)</span></li>
+          <li><span class="facts__drop" aria-hidden="true"></span><span data-i18n="cd.fact2">Отбор участников 19–21 ноября</span></li>
+          <li><span class="facts__drop" aria-hidden="true"></span><span data-i18n="cd.fact3">Open Day 22 ноября, онлайн</span></li>
+        </ul>
+        <div class="reveal"><button type="button" class="btn btn--primary btn--lg" data-register><span data-register-label data-i18n="cta.register">Зарегистрироваться</span></button></div>
+      </div>
+    </section>
+
+    <!-- 4. Организаторы и партнёры -->
+    <section class="section partners" id="partners" data-section="partners" data-rail="nav.partners">
+      <div class="container">
+        <header class="sec-head">
+          <p class="eyebrow eyebrow--mono reveal" data-i18n="partners.eyebrow">Организаторы и партнёры</p>
+          <h2 class="h2 reveal" data-i18n="partners.title">Вместе за каждую каплю</h2>
+          <p class="sec-lead reveal" data-i18n="partners.lead">Объединяем усилия государства, бизнеса и технологического сообщества, чтобы создавать инновационные решения для сохранения водных ресурсов.</p>
+        </header>
+
+        <h3 class="group-label mono reveal" data-i18n="partners.group.org">Организаторы и партнёры</h3>
+        <!-- Сетка auto-fit: новые карточки встают без переделки макета -->
+        <ul class="partner-grid partner-grid--lg" role="list">
+          <li class="reveal">
+            <a class="partner glass" href="https://www.gov.kz/memleket/entities/water" target="_blank" rel="noopener noreferrer">
+              <span class="partner__logo partner__logo--ministry">
+                <!-- Заменить на официальный SVG-логотип Министерства -->
+                <svg viewBox="0 0 64 64" aria-hidden="true" class="ministry-mark">
+                  <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="2" />
+                  <circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="1" opacity=".5" />
+                  <path d="M32 14c5.6 6.6 10 12 10 17.6a10 10 0 0 1-20 0C22 26 26.4 20.6 32 14z" fill="currentColor" class="ministry-mark__drop" />
+                  <path d="M16 44c5.3-3 10.7-3 16 0s10.7 3 16 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <span class="partner__name" data-i18n="partners.ministry">Министерство водных ресурсов и ирригации Республики Казахстан</span>
+              </span>
+              <span class="partner__role mono" data-i18n="partners.ministry.role">Организатор · отраслевая экспертиза и задачи</span>
+              <svg class="partner__ext" aria-hidden="true"><use href="#i-ext" /></svg>
+            </a>
+          </li>
+          <li class="reveal" style="--i:1">
+            <a class="partner partner--brand glass" href="https://ftel.kz" target="_blank" rel="noopener noreferrer">
+              <span class="partner__logo">
+                <!-- Заменить на официальный SVG-логотип Freedom Telecom -->
+                <img src="logos/freedom-telecom.svg" alt="Freedom Telecom" width="240" height="56" />
+              </span>
+              <span class="partner__role mono" data-i18n="partners.freedom.role">Организатор · технологический партнёр</span>
+              <svg class="partner__ext" aria-hidden="true"><use href="#i-ext" /></svg>
+            </a>
+          </li>
+        </ul>
+
+        <h3 class="group-label mono reveal" data-i18n="partners.group.media">Медиапартнёр</h3>
+        <ul class="partner-grid partner-grid--sm" role="list">
+          <li class="reveal">
+            <a class="partner partner--compact glass" href="https://kz.kursiv.media" target="_blank" rel="noopener noreferrer">
+              <span class="partner__logo">
+                <!-- Заменить на официальный SVG-логотип Kursiv -->
+                <img src="logos/kursiv.svg" alt="Курсив (Kursiv.media)" width="150" height="40" />
+              </span>
+              <span class="partner__role mono" data-i18n="partners.kursiv.role">Деловое медиа</span>
+              <svg class="partner__ext" aria-hidden="true"><use href="#i-ext" /></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5. Почему участвовать -->
+    <section class="section why" id="why" data-section="why" data-rail="nav.why">
+      <div class="container">
+        <header class="sec-head">
+          <p class="eyebrow eyebrow--mono reveal" data-i18n="why.eyebrow">Почему участвовать</p>
+          <h2 class="h2 reveal" data-i18n="why.title">Твоя идея может изменить то, как страна бережёт воду</h2>
+        </header>
+        <ul class="bento" role="list">
+          <li class="card glass card--feature reveal">
+            <span class="card__num mono">01</span>
+            <svg class="icon icon--lg" aria-hidden="true"><use href="#i-prize" /></svg>
+            <h3 class="card__title" data-i18n="why.1.t">Призовой фонд {prize}</h3>
+            <p class="card__text" data-i18n="why.1.d">Лучшие команды получат денежные призы — и признание отрасли.</p>
+            <div class="card__ripple" aria-hidden="true"></div>
+          </li>
+          <li class="card glass reveal" style="--i:1">
+            <span class="card__num mono">02</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-target" /></svg>
+            <h3 class="card__title" data-i18n="why.2.t">Реальные задачи отрасли</h3>
+            <p class="card__text" data-i18n="why.2.d"></p>
+          </li>
+          <li class="card glass reveal" style="--i:2">
+            <span class="card__num mono">03</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-experts" /></svg>
+            <h3 class="card__title" data-i18n="why.3.t">Эксперты рядом</h3>
+            <p class="card__text" data-i18n="why.3.d"></p>
+          </li>
+          <li class="card glass reveal" style="--i:3">
+            <span class="card__num mono">04</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-stage" /></svg>
+            <h3 class="card__title" data-i18n="why.4.t">Demo Day в Астане</h3>
+            <p class="card__text" data-i18n="why.4.d"></p>
+          </li>
+          <li class="card glass reveal" style="--i:4">
+            <span class="card__num mono">05</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-globe" /></svg>
+            <h3 class="card__title" data-i18n="why.5.t">Из любой точки</h3>
+            <p class="card__text" data-i18n="why.5.d"></p>
+          </li>
+          <li class="card glass reveal" style="--i:5">
+            <span class="card__num mono">06</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-layers" /></svg>
+            <h3 class="card__title" data-i18n="why.6.t">Команда и портфолио</h3>
+            <p class="card__text" data-i18n="why.6.d"></p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Программа: путь капли — ручей превращается в реку -->
+    <section class="section program" id="program" data-section="program" data-rail="nav.program">
+      <div class="container">
+        <header class="sec-head">
+          <p class="eyebrow eyebrow--mono reveal" data-i18n="program.eyebrow">Программа</p>
+          <h2 class="h2 reveal" data-i18n="program.title">Путь капли: от заявки до Demo Day</h2>
+          <p class="sec-lead mono reveal" data-i18n="program.lead">Все даты и время — по Астане (UTC+5).</p>
+        </header>
+        <div class="river">
+          <svg class="river__svg" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="river-g" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#23c5ff" />
+                <stop offset="1" stop-color="#1ae276" />
+              </linearGradient>
+            </defs>
+            <path class="river__bed" d="M50 0C70 70 30 140 50 210S70 350 50 420 30 560 50 630 70 770 50 840 40 950 50 1000" />
+            <path class="river__flow" d="M50 0C70 70 30 140 50 210S70 350 50 420 30 560 50 630 70 770 50 840 40 950 50 1000" pathLength="1" />
+          </svg>
+          <ol class="timeline" role="list">
+            <li class="tl reveal" data-tl="reg"><span class="tl__node" aria-hidden="true"></span><div class="tl__card glass"><p class="tl__date mono" data-i18n="p.1.d"></p><h3 class="tl__title" data-i18n="p.1.t"></h3><p class="tl__text" data-i18n="p.1.x"></p><span class="tag tag--online" data-i18n="tag.online"></span></div></li>
+            <li class="tl reveal" data-tl="select"><span class="tl__node" aria-hidden="true"></span><div class="tl__card glass"><p class="tl__date mono" data-i18n="p.2.d"></p><h3 class="tl__title" data-i18n="p.2.t"></h3><p class="tl__text" data-i18n="p.2.x"></p><span class="tag" data-i18n="tag.email"></span></div></li>
+            <li class="tl reveal" data-tl="open"><span class="tl__node" aria-hidden="true"></span><div class="tl__card glass"><p class="tl__date mono" data-i18n="p.3.d"></p><h3 class="tl__title" data-i18n="p.3.t"></h3><p class="tl__text" data-i18n="p.3.x"></p><span class="tag tag--online" data-i18n="tag.online"></span></div></li>
+            <li class="tl reveal" data-tl="dev"><span class="tl__node" aria-hidden="true"></span><div class="tl__card glass"><p class="tl__date mono" data-i18n="p.4.d"></p><h3 class="tl__title" data-i18n="p.4.t"></h3><p class="tl__text" data-i18n="p.4.x"></p><span class="tag tag--online" data-i18n="tag.online"></span></div></li>
+            <li class="tl reveal" data-tl="mvp"><span class="tl__node" aria-hidden="true"></span><div class="tl__card glass"><p class="tl__date mono" data-i18n="p.5.d"></p><h3 class="tl__title" data-i18n="p.5.t"></h3><p class="tl__text" data-i18n="p.5.x"></p><span class="tag tag--online" data-i18n="tag.online"></span></div></li>
+            <li class="tl reveal" data-tl="review"><span class="tl__node" aria-hidden="true"></span><div class="tl__card glass"><p class="tl__date mono" data-i18n="p.6.d"></p><h3 class="tl__title" data-i18n="p.6.t"></h3><p class="tl__text" data-i18n="p.6.x"></p><span class="tag" data-i18n="tag.experts"></span></div></li>
+            <li class="tl tl--final reveal" data-tl="demo"><span class="tl__node" aria-hidden="true"></span><div class="tl__card glass"><p class="tl__date mono" data-i18n="p.7.d"></p><h3 class="tl__title" data-i18n="p.7.t"></h3><p class="tl__text" data-i18n="p.7.x"></p><span class="tag tag--offline" data-i18n="tag.offline"></span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Кто может участвовать -->
+    <section class="section who" id="who" data-section="who" data-rail="nav.who">
+      <div class="container">
+        <header class="sec-head">
+          <p class="eyebrow eyebrow--mono reveal" data-i18n="who.eyebrow">Кто может участвовать</p>
+          <h2 class="h2 reveal" data-i18n="who.title">Каждая капля важна — и каждая роль тоже</h2>
+        </header>
+        <div class="who__grid">
+          <ul class="roles" role="list">
+            <li class="role glass reveal"><svg class="icon" aria-hidden="true"><use href="#i-code" /></svg><div><h3 class="card__title" data-i18n="who.1.t"></h3><p class="card__text" data-i18n="who.1.d"></p></div></li>
+            <li class="role glass reveal" style="--i:1"><svg class="icon" aria-hidden="true"><use href="#i-data" /></svg><div><h3 class="card__title" data-i18n="who.2.t"></h3><p class="card__text" data-i18n="who.2.d"></p></div></li>
+            <li class="role glass reveal" style="--i:2"><svg class="icon" aria-hidden="true"><use href="#i-student" /></svg><div><h3 class="card__title" data-i18n="who.3.t"></h3><p class="card__text" data-i18n="who.3.d"></p></div></li>
+            <li class="role glass reveal" style="--i:3"><svg class="icon" aria-hidden="true"><use href="#i-wave" /></svg><div><h3 class="card__title" data-i18n="who.4.t"></h3><p class="card__text" data-i18n="who.4.d"></p></div></li>
+          </ul>
+          <aside class="rules glass reveal" style="--i:2">
+            <h3 class="group-label mono" data-i18n="who.rules">Условия участия</h3>
+            <dl class="rules__list">
+              <div class="rules__row rules__row--big"><dt data-i18n="who.r1.k"></dt><dd class="mono" data-i18n="who.r1.v"></dd></div>
+              <div class="rules__row rules__row--big"><dt data-i18n="who.r2.k"></dt><dd data-i18n="who.r2.v"></dd></div>
+              <div class="rules__row"><dt data-i18n="who.r3.k"></dt><dd data-i18n="who.r3.v"></dd></div>
+              <div class="rules__row"><dt data-i18n="who.r4.k"></dt><dd data-i18n="who.r4.v"></dd></div>
+              <div class="rules__row"><dt data-i18n="who.r5.k"></dt><dd data-i18n="who.r5.v"></dd></div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FAQ -->
+    <section class="section faq" id="faq" data-section="faq" data-rail="nav.faq">
+      <div class="container faq__inner">
+        <header class="sec-head faq__head">
+          <p class="eyebrow eyebrow--mono reveal" data-i18n="faq.eyebrow">FAQ</p>
+          <h2 class="h2 reveal" data-i18n="faq.title">Частые вопросы</h2>
+        </header>
+        <div class="faq__list" data-faq></div>
+      </div>
+    </section>
+
+    <!-- 9. Финальный призыв: озеро -->
+    <section class="section final" id="apply" data-section="final" data-rail="rail.final">
+      <div class="lake" aria-hidden="true">
+        <div class="lake__surface"></div>
+        <span class="lake__ring"></span><span class="lake__ring" style="--d:1.6s"></span><span class="lake__ring" style="--d:3.2s"></span>
+      </div>
+      <div class="container final__inner">
+        <p class="eyebrow eyebrow--mono reveal" data-i18n="final.eyebrow">Финальный шаг</p>
+        <h2 class="final__title reveal" data-i18n="final.title">Твоя идея — та самая капля</h2>
+        <p class="sec-lead reveal" data-i18n="final.lead"></p>
+        <p class="eyebrow eyebrow--mono final__stage reveal" data-stage-label></p>
+        <div class="timer timer--compact glass reveal" data-timer></div>
+        <div class="reveal"><button type="button" class="btn btn--primary btn--xl" data-register><span data-register-label data-i18n="cta.register">Зарегистрироваться</span></button></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. Футер -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a class="logo" href="#top" aria-label="Water Innovation Hackathon">
+          <svg class="logo__mark" aria-hidden="true"><use href="#logo-mark" /></svg>
+          <span class="logo__text"><b>Water Innovation</b><span>Hackathon</span></span>
+        </a>
+        <p class="footer__tag" data-i18n="footer.tagline">Хакатон по водным ресурсам Казахстана</p>
+        <p class="footer__slogan mono">Innovate for Every Drop</p>
+      </div>
+      <nav class="footer__col" aria-labelledby="f-nav">
+        <h3 id="f-nav" class="group-label mono" data-i18n="footer.nav">Навигация</h3>
+        <a href="#why" data-i18n="nav.why"></a><a href="#program" data-i18n="nav.program"></a><a href="#who" data-i18n="nav.who"></a><a href="#partners" data-i18n="nav.partners"></a><a href="#faq" data-i18n="nav.faq"></a>
+      </nav>
+      <div class="footer__col">
+        <h3 class="group-label mono" data-i18n="footer.contacts">Контакты</h3>
+        <a href="mailto:hello@example.kz" data-contact-email><svg class="icon icon--sm" aria-hidden="true"><use href="#i-mail" /></svg><span>hello@example.kz</span></a>
+        <a href="#" data-contact-tg target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-tg" /></svg><span>Telegram</span></a>
+      </div>
+      <div class="footer__col">
+        <h3 class="group-label mono" data-i18n="footer.docs">Документы</h3>
+        <a href="#" data-doc="privacy" data-i18n="footer.privacy">Политика конфиденциальности</a>
+        <a href="#" data-doc="rules" data-i18n="footer.rules">Правила участия</a>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p class="mono" data-i18n="footer.rights">© 2026 Water Innovation Hackathon.</p>
+      <a href="#top" class="mono footer__top" data-i18n="footer.top">Наверх</a>
+    </div>
+  </footer>
+
+  <!-- Закреплённая кнопка на мобильных -->
+  <div class="sticky-cta">
+    <button type="button" class="btn btn--primary btn--block" data-register><span data-register-label data-i18n="cta.register">Зарегистрироваться</span></button>
+  </div>
+
+  <!-- Форма регистрации -->
+  <dialog class="reg" id="reg" aria-labelledby="reg-title">
+    <div class="reg__panel">
+      <button type="button" class="reg__close" data-reg-close data-i18n-attr="aria-label:form.close" aria-label="Закрыть форму"><svg aria-hidden="true"><use href="#i-close" /></svg></button>
+      <div class="reg__body" data-reg-body></div>
+    </div>
+  </dialog>
+
+  <div class="sr-only" aria-live="polite" data-announcer></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
