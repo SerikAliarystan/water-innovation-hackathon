@@ -16,6 +16,7 @@ import { initWater } from './modules/water.js';
 import { initHero } from './modules/hero.js';
 import { initCountdown } from './modules/countdown.js';
 import { initForm } from './modules/form.js';
+import { initTheme } from './modules/theme.js';
 
 document.documentElement.classList.add('js');
 
@@ -64,7 +65,8 @@ applyI18n();
 // Визуальные эффекты
 initReveal();
 const water = initWater($('.hero .water'), { reducedMotion });
-initWater($('.final .water'), { reducedMotion, lake: true });
+const lake = initWater($('.final .water'), { reducedMotion, lake: true });
+initTheme({ onChange: (theme) => [water, lake].forEach((w) => w.setDark(theme === 'dark')) });
 initHero(water);
 initButtonRipples();
 initSurfaceLight();

@@ -37,6 +37,15 @@ main, .footer { position: relative; z-index: 1; }
 }
 .header__actions { display: flex; align-items: center; gap: 12px; }
 
+/* переключатель темы */
+.theme-btn { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--text-2); cursor: pointer; transition: color var(--dur-1), background-color var(--dur-1); }
+.theme-btn:hover { color: var(--text); background: rgba(var(--fg-rgb), 0.06); }
+.theme-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.theme-btn .i-moon { display: none; }
+html[data-theme='dark'] .theme-btn .i-sun { display: none; }
+html[data-theme='dark'] .theme-btn .i-moon { display: block; }
+.mobile-menu__row { display: flex; align-items: center; gap: 12px; }
+
 .burger { display: none; position: relative; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; box-shadow: inset 0 0 0 1px var(--line-2); cursor: pointer; }
 .burger span { position: absolute; left: 13px; right: 13px; height: 1.5px; border-radius: 2px; background: var(--text); transition: transform var(--dur-2) var(--ease), top var(--dur-2) var(--ease); }
 .burger span:first-child { top: 18px; }
@@ -105,6 +114,7 @@ main, .footer { position: relative; z-index: 1; }
     transition: opacity var(--dur-2), width var(--dur-2) var(--ease), height var(--dur-2) var(--ease), margin var(--dur-2) var(--ease);
   }
   .cursor.is-on { opacity: 1; }
+  html[data-theme='dark'] .cursor { mix-blend-mode: screen; }
   .cursor.is-hover { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
   .cursor-ring {
     position: fixed; z-index: 89; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; pointer-events: none;

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title data-i18n="meta.title">Water Innovation Hackathon — Инновации ради каждой капли</title>
   <meta name="description" data-i18n-attr="content:meta.desc" content="Хакатон по водным ресурсам Казахстана. Онлайн-разработка 22–26 ноября, Demo Day 28 ноября в Астане. Приём заявок до 18 ноября 2026." />
-  <meta name="theme-color" content="#f5fafa" />
+  <meta name="theme-color" content="#f5fafa" data-theme-color />
   <meta property="og:title" content="Water Innovation Hackathon — Innovate for Every Drop" />
   <meta property="og:description" content="6–28 ноября 2026 · Астана. Команды 3–5 человек, онлайн-разработка, финал в Астане." />
   <meta property="og:type" content="website" />
@@ -21,6 +21,10 @@
       if (l !== 'ru' && l !== 'kk' && l !== 'en') l = 'ru';
       document.documentElement.lang = l;
       document.documentElement.dataset.lang = l;
+      // тема: выбор посетителя, по умолчанию — светлая
+      var th = null;
+      try { th = new URLSearchParams(location.search).get('theme') || localStorage.getItem('wih-theme'); } catch (e) {}
+      document.documentElement.dataset.theme = th === 'dark' ? 'dark' : 'light';
     })();
   </script>
 </head>
@@ -76,6 +80,10 @@
         <a href="#faq" data-nav="faq" data-i18n="nav.faq">FAQ</a>
       </nav>
       <div class="header__actions">
+        <button type="button" class="theme-btn" data-theme-btn aria-label="Тёмная тема">
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4" /></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" /></svg>
+        </button>
         <div class="lang" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Язык сайта">
           <button type="button" data-lang-btn="ru" lang="ru">RU</button>
           <button type="button" data-lang-btn="kk" lang="kk">ҚАЗ</button>
@@ -96,10 +104,16 @@
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
     </nav>
     <div class="mobile-menu__foot">
+      <div class="mobile-menu__row">
+      <button type="button" class="theme-btn theme-btn--lg" data-theme-btn aria-label="Тёмная тема">
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4" /></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" /></svg>
+        </button>
       <div class="lang lang--lg" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Язык сайта">
         <button type="button" data-lang-btn="ru" lang="ru">RU</button>
         <button type="button" data-lang-btn="kk" lang="kk">ҚАЗ</button>
         <button type="button" data-lang-btn="en" lang="en">EN</button>
+      </div>
       </div>
       <button type="button" class="btn btn--primary btn--block btn--lg" data-register><span data-register-label data-i18n="cta.register">Зарегистрироваться</span></button>
     </div>
@@ -244,7 +258,7 @@
         <!-- auto-fit: новые организаторы встают в сетку без переделки макета -->
         <ul class="cells cells--partners" role="list">
           <li class="reveal">
-            <a class="partner" href="https://www.gov.kz/memleket/entities/water" target="_blank" rel="noopener noreferrer">
+            <a class="partner theme-light" href="https://www.gov.kz/memleket/entities/water" target="_blank" rel="noopener noreferrer">
               <span class="partner__logo partner__logo--ministry">
                 <!-- Фирменный локап: государственный герб РК + название на казахском -->
                 <img class="ministry-emblem" src="logos/emblem-kz.svg" alt="" width="84" height="84" />
@@ -256,7 +270,7 @@
             </a>
           </li>
           <li class="reveal" style="--i:1">
-            <a class="partner partner--brand" href="https://ftel.kz" target="_blank" rel="noopener noreferrer">
+            <a class="partner theme-light partner--brand" href="https://ftel.kz" target="_blank" rel="noopener noreferrer">
               <span class="partner__logo">
                 <!-- Официальный логотип с ftel.kz (единый бренд Freedom) -->
                 <img src="logos/freedom-telecom.svg" alt="Freedom Telecom" width="160" height="48" />
@@ -270,7 +284,7 @@
         <h3 class="group-label reveal" data-i18n="partners.group.media">Медиапартнёр</h3>
         <ul class="cells cells--media" role="list">
           <li class="reveal">
-            <a class="partner partner--compact" href="https://kz.kursiv.media" target="_blank" rel="noopener noreferrer">
+            <a class="partner theme-light partner--compact" href="https://kz.kursiv.media" target="_blank" rel="noopener noreferrer">
               <span class="partner__logo">
                 <!-- Официальный логотип с kz.kursiv.media -->
                 <img src="logos/kursiv.svg" alt="Курсив (Kursiv.media)" width="135" height="21" />

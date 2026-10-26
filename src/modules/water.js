@@ -17,6 +17,7 @@ uniform float uTime;
 uniform vec2 uPointer;
 uniform vec4 uRipples[${MAX_RIPPLES}]; // xy — позиция (0..1), z — время старта, w — сила
 uniform float uLake; // 1 — финальное «озеро»: свет снизу, а не сверху
+uniform float uDark; // 0 — светлая тема, 1 — тёмная (плавный переход)
 
 float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float noise(vec2 p) {
@@ -88,6 +89,15 @@ void main() {
   col = mix(col, vec3(1.0), glow * 0.22);                          // свет под курсором
   float beam = exp(-pow((uv.x - 0.72 - (uv.y - 1.0) * 0.25) * 3.2, 2.0)) * smoothstep(0.1, 1.0, uv.y) * (1.0 - uLake);
   col = mix(col, vec3(1.0), beam * 0.18);                          // солнечный столб
+
+  // Тёмная вода: глубина с бирюзовыми бликами
+  vec3 cyan = vec3(0.45, 0.85, 0.9);
+  vec3 dark = mix(vec3(0.01, 0.05, 0.065), vec3(0.03, 0.15, 0.18), depth);
+  dark += cyan * cs * (0.12 + 0.14 * depth);
+  dark += brand * cs * 0.06 * (1.0 - vy);
+  dark += mix(cyan, brand, 0.35) * min(rings, 1.0) * 0.3;
+  dark += cyan * glow * 0.1 + vec3(0.6, 0.95, 1.0) * beam * 0.06;
+  col = mix(col, dark, uDark);
   // зерно, чтобы не было бандинга
   col += (hash(gl_FragCoord.xy + uTime) - 0.5) * 0.012;
 
@@ -98,7 +108,7 @@ void main() {
 export function initWater(container, { reducedMotion, lake = false } = {}) {
   const canvas = container.querySelector('.water__canvas');
   const section = container.parentElement; // секция принимает события указателя
-  const api = { ripple() {}, ok: false };
+  const api = { ripple() {}, setDark() {}, ok: false };
   if (!canvas || reducedMotion) return api;
 
   let gl;
@@ -136,6 +146,10 @@ export function initWater(container, { reducedMotion, lake = false } = {}) {
   const uPointer = gl.getUniformLocation(prog, 'uPointer');
   const uRipples = gl.getUniformLocation(prog, 'uRipples');
   gl.uniform1f(gl.getUniformLocation(prog, 'uLake'), lake ? 1 : 0);
+  const uDark = gl.getUniformLocation(prog, 'uDark');
+  let dark = document.documentElement.dataset.theme === 'dark' ? 1 : 0;
+  let darkT = dark;
+  api.setDark = (on) => { darkT = on ? 1 : 0; };
 
   const ripples = new Float32Array(MAX_RIPPLES * 4);
   let rIdx = 0;
@@ -203,6 +217,8 @@ export function initWater(container, { reducedMotion, lake = false } = {}) {
     pointer.x += (pointer.tx - pointer.x) * 0.06;
     pointer.y += (pointer.ty - pointer.y) * 0.06;
     gl.uniform2f(uRes, canvas.width, canvas.height);
+    dark += (darkT - dark) * 0.08; // плавная смена темы
+    gl.uniform1f(uDark, dark);
     gl.uniform1f(uTime, now());
     gl.uniform2f(uPointer, pointer.x, pointer.y);
     gl.uniform4fv(uRipples, ripples);
