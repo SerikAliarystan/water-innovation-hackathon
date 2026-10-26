@@ -1,6 +1,7 @@
-// Водная поверхность баннера на WebGL: каустика + рябь от курсора/касаний/падающей капли.
+// Водная поверхность на WebGL: каустика + рябь от курсора/касаний/падающих капель.
 // Аналитические волны (без симуляции) — дёшево для мобильных, стабильные 60 fps.
-// Запасной вариант: статичный CSS-фон .hero__fallback (если нет WebGL или включено уменьшение движения).
+// Используется в баннере и в финальном «озере». Запасной вариант — CSS-фон .water__fallback
+// (если нет WebGL или включено уменьшение движения).
 
 const MAX_RIPPLES = 12;
 
@@ -15,6 +16,7 @@ uniform vec2 uRes;
 uniform float uTime;
 uniform vec2 uPointer;
 uniform vec4 uRipples[${MAX_RIPPLES}]; // xy — позиция (0..1), z — время старта, w — сила
+uniform float uLake; // 1 — финальное «озеро»: свет снизу, а не сверху
 
 float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float noise(vec2 p) {
@@ -71,20 +73,21 @@ void main() {
   float cs = caustic(q * 4.2 + vec2(n * 0.6), t * 1.2);
 
   // Цвета: глубина → лагуна, блики циана, бренд-зелень у дна
-  vec3 abyss = vec3(0.008, 0.043, 0.063);
-  vec3 lagoon = vec3(0.039, 0.204, 0.251);
-  vec3 cyan = vec3(0.137, 0.773, 1.0);
+  vec3 abyss = vec3(0.012, 0.03, 0.04);
+  vec3 lagoon = vec3(0.04, 0.16, 0.19);
+  vec3 cyan = vec3(0.5, 0.86, 0.9);
   vec3 brand = vec3(0.102, 0.886, 0.463);
 
-  float depth = smoothstep(0.0, 1.0, uv.y * 0.9 + n * 0.25);
+  float vy = mix(uv.y, 1.0 - uv.y, uLake);
+  float depth = smoothstep(0.0, 1.0, vy * 0.9 + n * 0.25);
   vec3 col = mix(abyss, lagoon, depth);
   col += cyan * cs * (0.10 + 0.14 * depth);
-  col += brand * cs * 0.05 * (1.0 - uv.y);
+  col += brand * cs * 0.05 * (1.0 - vy);
   col += mix(cyan, brand, 0.35) * min(rings, 1.0) * 0.30;
   col += cyan * glow * 0.10;
   // световой столб сверху справа
-  float beam = exp(-pow((uv.x - 0.72 - (uv.y - 1.0) * 0.25) * 3.2, 2.0)) * smoothstep(0.1, 1.0, uv.y);
-  col += vec3(0.6, 0.95, 1.0) * beam * 0.07;
+  float beam = exp(-pow((uv.x - 0.72 - (uv.y - 1.0) * 0.25) * 3.2, 2.0)) * smoothstep(0.1, 1.0, uv.y) * (1.0 - uLake);
+  col += vec3(0.6, 0.95, 1.0) * beam * 0.06;
   // зерно, чтобы не было бандинга
   col += (hash(gl_FragCoord.xy + uTime) - 0.5) * 0.012;
 
@@ -92,8 +95,9 @@ void main() {
 }
 `;
 
-export function initWater(hero, { reducedMotion }) {
-  const canvas = hero.querySelector('.hero__canvas');
+export function initWater(container, { reducedMotion, lake = false } = {}) {
+  const canvas = container.querySelector('.water__canvas');
+  const section = container.parentElement; // секция принимает события указателя
   const api = { ripple() {}, ok: false };
   if (!canvas || reducedMotion) return api;
 
@@ -131,6 +135,7 @@ export function initWater(hero, { reducedMotion }) {
   const uTime = gl.getUniformLocation(prog, 'uTime');
   const uPointer = gl.getUniformLocation(prog, 'uPointer');
   const uRipples = gl.getUniformLocation(prog, 'uRipples');
+  gl.uniform1f(gl.getUniformLocation(prog, 'uLake'), lake ? 1 : 0);
 
   const ripples = new Float32Array(MAX_RIPPLES * 4);
   let rIdx = 0;
@@ -143,8 +148,8 @@ export function initWater(hero, { reducedMotion }) {
   let scale = isCoarse ? 0.45 : 0.6;
   const resize = () => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = Math.max(1, Math.floor(hero.clientWidth * dpr * scale));
-    const h = Math.max(1, Math.floor(hero.clientHeight * dpr * scale));
+    const w = Math.max(1, Math.floor(section.clientWidth * dpr * scale));
+    const h = Math.max(1, Math.floor(section.clientHeight * dpr * scale));
     if (canvas.width !== w || canvas.height !== h) {
       canvas.width = w;
       canvas.height = h;
@@ -155,7 +160,7 @@ export function initWater(hero, { reducedMotion }) {
   window.addEventListener('resize', resize, { passive: true });
 
   const toUv = (clientX, clientY) => {
-    const r = hero.getBoundingClientRect();
+    const r = section.getBoundingClientRect();
     return { x: (clientX - r.left) / r.width, y: 1 - (clientY - r.top) / r.height };
   };
   api.ripple = (clientX, clientY, strength = 1) => {
@@ -166,7 +171,7 @@ export function initWater(hero, { reducedMotion }) {
 
   let lastMove = 0;
   let lx = 0, ly = 0;
-  hero.addEventListener('pointermove', (e) => {
+  section.addEventListener('pointermove', (e) => {
     const { x, y } = toUv(e.clientX, e.clientY);
     pointer.tx = x; pointer.ty = y;
     const t = performance.now();
@@ -176,12 +181,12 @@ export function initWater(hero, { reducedMotion }) {
       lastMove = t; lx = e.clientX; ly = e.clientY;
     }
   }, { passive: true });
-  hero.addEventListener('pointerdown', (e) => api.ripple(e.clientX, e.clientY, 1), { passive: true });
+  section.addEventListener('pointerdown', (e) => api.ripple(e.clientX, e.clientY, 1), { passive: true });
 
   // Пауза вне экрана и на скрытой вкладке
   let visible = true;
   let raf = 0;
-  new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) loop(); }, { threshold: 0 }).observe(hero);
+  new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) loop(); }, { threshold: 0 }).observe(section);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) loop(); });
 
   // Адаптивное качество: если кадры долгие — уменьшаем разрешение
@@ -206,11 +211,20 @@ export function initWater(hero, { reducedMotion }) {
   };
   function loop() { if (!raf) { lastT = performance.now(); raf = requestAnimationFrame(frame); } }
 
-  canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); hero.classList.remove('has-gl'); visible = false; });
+  canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); container.classList.remove('has-gl'); visible = false; });
+
+  // «Озеро»: редкие капли падают сами, пока блок на экране
+  if (lake) {
+    setInterval(() => {
+      if (!visible || document.hidden) return;
+      const r = section.getBoundingClientRect();
+      api.ripple(r.left + r.width * (0.15 + Math.random() * 0.7), r.top + r.height * (0.45 + Math.random() * 0.45), 0.9);
+    }, 1700);
+  }
 
   loop();
   // показываем canvas после первого кадра, до этого виден запасной фон
-  requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add('has-gl')));
+  requestAnimationFrame(() => requestAnimationFrame(() => container.classList.add('has-gl')));
   api.ok = true;
   return api;
 }

@@ -5,6 +5,15 @@ export const LANGS = ['ru', 'kk', 'en'];
 
 export const dict = {
   ru: {
+    'hero.spec.team': 'человек в команде',
+    'hero.scroll': 'Листайте',
+    'cd.now': 'Сейчас',
+    'cd.track': 'Этапы хакатона',
+    'program.col.date': 'Дата',
+    'program.col.stage': 'Этап',
+    'program.col.format': 'Формат',
+    'who.terms': 'Условия',
+    'final.deadline': 'Приём заявок до 18 ноября, 23:59 (Астана, UTC+5)',
     'meta.title': 'Water Innovation Hackathon — Инновации ради каждой капли',
     'meta.desc': 'Хакатон по водным ресурсам Казахстана. Онлайн-разработка 22–26 ноября, Demo Day 28 ноября в Астане. Приём заявок до 18 ноября 2026.',
     'skip': 'Перейти к содержанию',
@@ -54,7 +63,7 @@ export const dict = {
     'stage.review.label': 'До Demo Day в Астане',
     'stage.review.note': 'Эксперты выбирают 10 финалистов. Demo Day — 28 ноября.',
     'stage.demo.label': 'Demo Day — сегодня',
-    'stage.demo.note': 'Финалисты представляют решения в Астане. Удачи каждой команде!',
+    'stage.demo.note': 'Финалисты представляют решения жюри в Астане.',
     'stage.done.label': 'Хакатон завершён',
     'stage.done.note': 'Спасибо каждой капле, из которых сложилась эта река.',
 
@@ -70,7 +79,7 @@ export const dict = {
 
     'why.eyebrow': 'Почему участвовать',
     'why.title': 'Твоя идея может изменить то, как страна бережёт воду',
-    'why.1.t': 'Призовой фонд {prize}',
+    'why.1.t': 'Призовой фонд',
     'why.1.d': 'Лучшие команды получат денежные призы — и признание отрасли.',
     'why.2.t': 'Реальные задачи отрасли',
     'why.2.d': 'Кейсы от Министерства водных ресурсов и ирригации: работаешь над тем, что действительно нужно стране.',
@@ -237,6 +246,15 @@ export const dict = {
   },
 
   kk: {
+    'hero.spec.team': 'адамнан тұратын команда',
+    'hero.scroll': 'Төмен қарай',
+    'cd.now': 'Қазір',
+    'cd.track': 'Хакатон кезеңдері',
+    'program.col.date': 'Күні',
+    'program.col.stage': 'Кезең',
+    'program.col.format': 'Формат',
+    'who.terms': 'Шарттар',
+    'final.deadline': 'Өтінімдер 18 қараша, 23:59-ға дейін қабылданады (Астана, UTC+5)',
     'meta.title': 'Water Innovation Hackathon — Әр тамшы үшін инновация',
     'meta.desc': 'Қазақстанның су ресурстарына арналған хакатон. Онлайн әзірлеу 22–26 қараша, Demo Day 28 қарашада Астанада. Өтінімдер 2026 жылғы 18 қарашаға дейін қабылданады.',
     'skip': 'Мазмұнға өту',
@@ -286,7 +304,7 @@ export const dict = {
     'stage.review.label': 'Астанадағы Demo Day-ге дейін',
     'stage.review.note': 'Сарапшылар 10 финалисті таңдауда. Demo Day — 28 қарашада.',
     'stage.demo.label': 'Demo Day — бүгін',
-    'stage.demo.note': 'Финалистер шешімдерін Астанада таныстыруда. Әр командаға сәттілік!',
+    'stage.demo.note': 'Финалистер шешімдерін Астанада қазылар алқасына таныстыруда.',
     'stage.done.label': 'Хакатон аяқталды',
     'stage.done.note': 'Осы өзенді құраған әр тамшыға рахмет.',
 
@@ -302,7 +320,7 @@ export const dict = {
 
     'why.eyebrow': 'Неге қатысу керек',
     'why.title': 'Сенің идеяң елдің суды қалай сақтайтынын өзгерте алады',
-    'why.1.t': 'Жүлде қоры {prize}',
+    'why.1.t': 'Жүлде қоры',
     'why.1.d': 'Үздік командалар ақшалай жүлде мен сала мойындауын алады.',
     'why.2.t': 'Саланың нақты міндеттері',
     'why.2.d': 'Су ресурстары және ирригация министрлігінің кейстері: елге шынымен қажет мәселемен жұмыс істейсің.',
@@ -469,6 +487,15 @@ export const dict = {
   },
 
   en: {
+    'hero.spec.team': 'people per team',
+    'hero.scroll': 'Scroll',
+    'cd.now': 'Now',
+    'cd.track': 'Hackathon stages',
+    'program.col.date': 'Date',
+    'program.col.stage': 'Stage',
+    'program.col.format': 'Format',
+    'who.terms': 'Terms',
+    'final.deadline': 'Applications close November 18, 23:59 (Astana, UTC+5)',
     'meta.title': 'Water Innovation Hackathon — Innovate for Every Drop',
     'meta.desc': 'A hackathon for Kazakhstan’s water resources. Online build November 22–26, Demo Day November 28 in Astana. Apply by November 18, 2026.',
     'skip': 'Skip to content',
@@ -518,7 +545,7 @@ export const dict = {
     'stage.review.label': 'Until Demo Day in Astana',
     'stage.review.note': 'Experts are choosing 10 finalists. Demo Day is November 28.',
     'stage.demo.label': 'Demo Day is today',
-    'stage.demo.note': 'Finalists are presenting in Astana. Good luck to every team!',
+    'stage.demo.note': 'Finalists are presenting to the jury in Astana.',
     'stage.done.label': 'The hackathon is over',
     'stage.done.note': 'Thank you to every drop that made this river.',
 
@@ -534,7 +561,7 @@ export const dict = {
 
     'why.eyebrow': 'Why join',
     'why.title': 'Your idea can change how a country saves its water',
-    'why.1.t': '{prize} prize pool',
+    'why.1.t': 'Prize pool',
     'why.1.d': 'The best teams win cash prizes — and recognition from the industry.',
     'why.2.t': 'Real industry challenges',
     'why.2.d': 'Cases from the Ministry of Water Resources and Irrigation: work on what the country actually needs.',

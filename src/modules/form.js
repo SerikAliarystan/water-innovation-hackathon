@@ -1,4 +1,6 @@
-import { CONFIG, isRegistrationOpen } from './config.js';
+import { CONFIG, isRegistrationOpen } from '../config.js';
+import { t, onLangChange } from '../i18n/index.js';
+import { esc } from '../lib/dom.js';
 
 // Форма регистрации команды: 4 шага, валидация, 3–5 участников, защита от двойной отправки.
 // Пользовательские значения всегда проходят через esc() перед вставкой в разметку.
@@ -8,7 +10,6 @@ const MAX_MEMBERS = 5;
 const IDEA_MAX = 1000;
 const TRACKS = ['track.1', 'track.2', 'form.track.3full', 'form.track.4full', 'track.5', 'track.6', 'form.track.7'];
 
-const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 const emptyMember = () => ({ name: '', email: '', age: '', org: '', role: '' });
@@ -25,7 +26,7 @@ const freshState = () => ({
   sendError: false,
 });
 
-export function initForm({ t, announce }) {
+export function initForm({ announce }) {
   const dialog = document.getElementById('reg');
   const body = dialog.querySelector('[data-reg-body]');
   let state = freshState();
@@ -156,10 +157,10 @@ export function initForm({ t, announce }) {
 
   function step2() {
     return `
-      <p class="field__hint" style="font-size:14px">${esc(t('form.members.hint'))}</p>
+      <p class="reg__hint">${esc(t('form.members.hint'))}</p>
       ${state.members.map(memberBlock).join('')}
       <button type="button" class="btn btn--ghost add-member" data-add ${state.members.length >= MAX_MEMBERS ? 'disabled' : ''}>
-        <svg aria-hidden="true"><use href="#i-plus" /></svg>${esc(t('form.addMember'))} <span class="mono" style="color:var(--text-3)">${state.members.length}/${MAX_MEMBERS}</span>
+        <svg aria-hidden="true"><use href="#i-plus" /></svg>${esc(t('form.addMember'))} <span class="mono add-member__count">${state.members.length}/${MAX_MEMBERS}</span>
       </button>`;
   }
 
@@ -437,5 +438,7 @@ export function initForm({ t, announce }) {
     if (e.target.closest('[data-reg-close]')) close();
   });
 
-  return { open, close, rerender: () => dialog.open && render() };
+  onLangChange(() => { if (dialog.open) render(); });
+
+  return { open, close };
 }
