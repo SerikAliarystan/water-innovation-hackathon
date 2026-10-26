@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "vite build && npx surge@0.24.6 dist water-innovation-hackathon.surge.sh"
   },
   "devDependencies": {
     "vite": "5.4.10"

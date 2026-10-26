@@ -6,6 +6,7 @@ Innovate for Every Drop · Инновации ради каждой капли �
 npm install
 npm run dev      # локально
 npm run build    # сборка в dist/
+npm run deploy   # публикация на https://water-innovation-hackathon.surge.sh
 ```
 
 - Настройки (призовой фонд, URL приёма заявок, контакты): `src/config.js`
