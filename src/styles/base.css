@@ -18,7 +18,6 @@ body {
   background: var(--ink-0);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  font-feature-settings: 'cv11', 'ss01', 'ss03';
 }
 
 img, svg { display: block; max-width: 100%; }
@@ -52,27 +51,27 @@ p { margin: 0; }
 .h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(34px, 4.6vw, 64px);
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 72px);
   line-height: 1.02;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
+.h2 em, .final__title em { font-style: italic; color: var(--aqua); }
 .sec-lead {
-  max-width: 56ch; margin-top: 24px;
-  font-size: clamp(16px, 1.3vw, 18px); color: var(--text-2); text-wrap: pretty;
+  max-width: 54ch; margin-top: 22px;
+  font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; color: var(--text-2); text-wrap: pretty;
 }
+/* метка над заголовком: обычный гротеск, без капса */
 .kicker {
   display: inline-flex; align-items: center; gap: 10px;
-  font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-2);
+  font-size: 15px; font-weight: 600; letter-spacing: 0; color: var(--brand-deep);
 }
 .kicker__dot {
-  width: 7px; height: 9px; flex: none; background: var(--brand);
-  clip-path: path('M3.5 0C5.4 2.3 7 4.1 7 5.6A3.5 3.5 0 0 1 0 5.6C0 4.1 1.6 2.3 3.5 0Z');
+  width: 9px; height: 11px; flex: none; background: currentColor;
+  clip-path: path('M4.5 0C7 3 9 5.3 9 7.2A4.5 4.5 0 0 1 0 7.2C0 5.3 2 3 4.5 0Z');
 }
-.group-label {
-  margin: 0 0 16px; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3);
-}
+.group-label { margin: 0 0 18px; font-size: 14px; font-weight: 600; color: var(--text-3); }
 
 /* Появление при скролле — только сдвиг и прозрачность */
 .js .reveal {

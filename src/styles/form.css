@@ -12,12 +12,12 @@
 .reg__close { position: absolute; top: 16px; right: 16px; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; box-shadow: inset 0 0 0 1px var(--line-2); cursor: pointer; }
 .reg__close svg { width: 18px; height: 18px; fill: none; stroke: var(--text); stroke-width: 1.8; stroke-linecap: round; }
 .reg__close:hover { box-shadow: inset 0 0 0 1px var(--line-3); }
-.reg__title { margin: 0; padding-right: 52px; font-family: var(--font-display); font-weight: 500; font-size: clamp(26px, 3.4vw, 36px); letter-spacing: -0.03em; line-height: 1.1; }
+.reg__title { margin: 0; padding-right: 52px; font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.8vw, 42px); letter-spacing: -0.015em; line-height: 1.05; }
 .reg__lead { margin-top: 12px; color: var(--text-2); }
 
 .steps { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-.steps li { display: grid; gap: 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
-.steps li::before { content: ''; height: 2px; border-radius: 2px; background: var(--line-2); transition: background-color var(--dur-2); }
+.steps li { display: grid; gap: 10px; font-size: 13px; font-weight: 600; color: var(--text-3); }
+.steps li::before { content: ''; height: 4px; border-radius: 2px; background: var(--line-2); transition: background-color var(--dur-2); }
 .steps li.is-done::before { background: var(--aqua); }
 .steps li.is-current { color: var(--text); }
 .steps li.is-current::before { background: var(--brand); }
@@ -54,7 +54,7 @@ select.input option { background: var(--ink-1); }
 
 .member { display: grid; gap: 16px; padding: 20px; border-radius: var(--r-2); box-shadow: inset 0 0 0 1px var(--line); }
 .member__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.member__title { margin: 0; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--aqua); }
+.member__title { margin: 0; font-size: 15px; font-weight: 700; color: var(--aqua-2); }
 .member--captain .member__title { color: var(--brand-deep); }
 .icon-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 0; border-radius: 8px; background: transparent; box-shadow: inset 0 0 0 1px var(--line); color: var(--text-2); font-size: 13px; cursor: pointer; }
 .icon-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
@@ -74,7 +74,7 @@ select.input option { background: var(--ink-1); }
 
 .summary { display: grid; gap: 10px; margin: 0; padding: 20px; border-radius: var(--r-2); box-shadow: inset 0 0 0 1px var(--line); font-size: 14px; }
 .summary__row { display: grid; grid-template-columns: 160px 1fr; gap: 12px; }
-.summary__row dt { padding-top: 2px; font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
+.summary__row dt { padding-top: 1px; font-size: 13px; font-weight: 600; color: var(--text-3); }
 .summary__row dd { margin: 0; word-break: break-word; }
 .reg__alert { padding: 12px 16px; border-radius: 10px; background: rgba(var(--danger-rgb), 0.08); box-shadow: inset 0 0 0 1px rgba(var(--danger-rgb), 0.35); color: var(--danger); font-size: 14px; }
 .reg__alert:empty { display: none; }
@@ -89,7 +89,7 @@ select.input option { background: var(--ink-1); }
 .success-drop svg { width: 100%; height: 100%; overflow: visible; }
 .success-drop__ring { position: absolute; bottom: 0; left: 50%; width: 120px; height: 28px; margin-left: -60px; border-radius: 50%; box-shadow: 0 0 0 1px var(--brand); animation: success-ring 2.4s var(--ease) infinite; }
 @keyframes success-ring { from { transform: scale(0.2); opacity: 1; } to { transform: scale(1.5); opacity: 0; } }
-.reg__success h2 { margin: 8px 0 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.03em; }
+.reg__success h2 { margin: 8px 0 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.6vw, 40px); letter-spacing: -0.015em; }
 .reg__success p { max-width: 46ch; color: var(--text-2); }
 .reg__success .btn { margin-top: 18px; }
 

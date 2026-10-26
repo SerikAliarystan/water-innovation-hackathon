@@ -12,7 +12,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Oswald:wght@400;500;600&display=swap" />
   <script>
     // Язык выставляем до отрисовки, чтобы не было «мигания» другого языка
     (function () {
@@ -60,9 +60,6 @@
   </svg>
 
   <a class="skip-link" href="#main" data-i18n="skip">Перейти к содержанию</a>
-
-  <!-- Редакционная сетка на фоне -->
-  <div class="grid-lines" aria-hidden="true"><div class="container"><span></span><span></span><span></span><span></span></div></div>
 
   <!-- 1. Шапка -->
   <header class="header" id="header">
@@ -127,10 +124,10 @@
 
       <div class="hero__inner container">
         <div class="hero__copy">
-          <p class="kicker mono hero__kicker"><span class="kicker__dot" aria-hidden="true"></span><span data-i18n="hero.eyebrow">Water Innovation Hackathon · 6–28 ноября 2026 · Астана</span></p>
+          <p class="kicker hero__kicker"><span class="kicker__dot" aria-hidden="true"></span><span data-i18n="hero.eyebrow">Water Innovation Hackathon · 6–28 ноября 2026 · Астана</span></p>
           <h1 class="hero__title" lang="en">
             <span class="line"><span>Innovate for</span></span>
-            <span class="line"><span class="hero__accent">Every Drop<span class="hero__dot" aria-hidden="true"></span></span></span>
+            <span class="line"><span class="hero__accent"><em>Every Drop</em><span class="hero__dot" aria-hidden="true"></span></span></span>
             <span class="sr-only">.</span>
           </h1>
           <p class="hero__slogan" data-i18n="hero.slogan">Инновации ради каждой капли</p>
@@ -194,7 +191,7 @@
           <div class="spec__item"><dt class="spec__num mono">5</dt><dd data-i18n="hero.stat.days">дней разработки</dd></div>
           <div class="spec__item"><dt class="spec__num mono">3–5</dt><dd data-i18n="hero.spec.team">человек в команде</dd></div>
         </dl>
-        <p class="hero__deadline mono"><span class="pulse" aria-hidden="true"></span><span data-i18n="hero.deadline">Приём заявок до 18 ноября, 23:59 (Астана, UTC+5)</span></p>
+        <p class="hero__deadline"><span class="pulse" aria-hidden="true"></span><span data-i18n="hero.deadline">Приём заявок до 18 ноября, 23:59 (Астана, UTC+5)</span></p>
       </div>
 
       <div class="marquee">
@@ -216,7 +213,7 @@
       <div class="countdown__rain" aria-hidden="true"></div>
       <div class="container">
         <div class="countdown__head">
-          <p class="kicker mono reveal"><span class="kicker__dot" aria-hidden="true"></span><span data-stage-label>До закрытия приёма заявок</span></p>
+          <p class="kicker reveal"><span class="kicker__dot" aria-hidden="true"></span><span data-stage-label>До закрытия приёма заявок</span></p>
           <h2 class="h2 reveal" data-i18n="cd.title">Каждая секунда на счету. Как и каждая капля.</h2>
         </div>
         <div class="timer reveal" data-timer role="timer"></div>
@@ -236,24 +233,25 @@
     <section class="section partners" id="partners" data-section="partners" data-rail="nav.partners">
       <div class="container">
         <header class="sec-head">
-          <p class="sec-head__meta mono reveal"><span data-i18n="partners.eyebrow">Организаторы и партнёры</span></p>
+          <p class="sec-head__meta reveal"><span data-i18n="partners.eyebrow">Организаторы и партнёры</span></p>
           <div class="sec-head__body">
             <h2 class="h2 reveal" data-i18n="partners.title">Вместе за каждую каплю</h2>
             <p class="sec-lead reveal" data-i18n="partners.lead">Объединяем усилия государства, бизнеса и технологического сообщества, чтобы создавать инновационные решения для сохранения водных ресурсов.</p>
           </div>
         </header>
 
-        <h3 class="group-label mono reveal" data-i18n="partners.group.org">Организаторы и партнёры</h3>
+        <h3 class="group-label reveal" data-i18n="partners.group.org">Организаторы и партнёры</h3>
         <!-- auto-fit: новые организаторы встают в сетку без переделки макета -->
         <ul class="cells cells--partners" role="list">
           <li class="reveal">
             <a class="partner" href="https://www.gov.kz/memleket/entities/water" target="_blank" rel="noopener noreferrer">
               <span class="partner__logo partner__logo--ministry">
-                <!-- Государственный герб РК (общественное достояние, Wikimedia Commons) -->
-                <img class="ministry-emblem" src="logos/emblem-kz.svg" alt="" width="72" height="72" />
-                <span class="partner__name partner__name--ministry" data-i18n="partners.ministry">Министерство водных ресурсов и ирригации Республики Казахстан</span>
+                <!-- Фирменный локап: государственный герб РК + название на казахском -->
+                <img class="ministry-emblem" src="logos/emblem-kz.svg" alt="" width="84" height="84" />
+                <span class="ministry-lockup" lang="kk"><span>Су ресурстары және ирригация</span><span>министрлігі</span></span>
               </span>
-              <span class="partner__role mono" data-i18n="partners.ministry.role">Организатор · отраслевая экспертиза и задачи</span>
+              <span class="partner__name partner__name--ministry" data-i18n="partners.ministry">Министерство водных ресурсов и ирригации Республики Казахстан</span>
+              <span class="partner__role " data-i18n="partners.ministry.role">Организатор · отраслевая экспертиза и задачи</span>
               <svg class="partner__ext" aria-hidden="true"><use href="#i-ext" /></svg>
             </a>
           </li>
@@ -263,13 +261,13 @@
                 <!-- Официальный логотип с ftel.kz (единый бренд Freedom) -->
                 <img src="logos/freedom-telecom.svg" alt="Freedom Telecom" width="160" height="48" />
               </span>
-              <span class="partner__role mono" data-i18n="partners.freedom.role">Организатор · технологический партнёр</span>
+              <span class="partner__role " data-i18n="partners.freedom.role">Организатор · технологический партнёр</span>
               <svg class="partner__ext" aria-hidden="true"><use href="#i-ext" /></svg>
             </a>
           </li>
         </ul>
 
-        <h3 class="group-label mono reveal" data-i18n="partners.group.media">Медиапартнёр</h3>
+        <h3 class="group-label reveal" data-i18n="partners.group.media">Медиапартнёр</h3>
         <ul class="cells cells--media" role="list">
           <li class="reveal">
             <a class="partner partner--compact" href="https://kz.kursiv.media" target="_blank" rel="noopener noreferrer">
@@ -277,7 +275,7 @@
                 <!-- Официальный логотип с kz.kursiv.media -->
                 <img src="logos/kursiv.svg" alt="Курсив (Kursiv.media)" width="135" height="21" />
               </span>
-              <span class="partner__role mono" data-i18n="partners.kursiv.role">Деловое медиа</span>
+              <span class="partner__role " data-i18n="partners.kursiv.role">Деловое медиа</span>
               <svg class="partner__ext" aria-hidden="true"><use href="#i-ext" /></svg>
             </a>
           </li>
@@ -289,13 +287,13 @@
     <section class="section why" id="why" data-section="why" data-rail="nav.why">
       <div class="container">
         <header class="sec-head">
-          <p class="sec-head__meta mono reveal"><span data-i18n="why.eyebrow">Почему участвовать</span></p>
+          <p class="sec-head__meta reveal"><span data-i18n="why.eyebrow">Почему участвовать</span></p>
           <div class="sec-head__body">
             <h2 class="h2 reveal" data-i18n="why.title">Твоя идея может изменить то, как страна бережёт воду</h2>
           </div>
         </header>
         <ul class="cells cells--why" role="list">
-          <li class="cell cell--prize reveal">
+          <li class="cell cell--prize theme-deep reveal">
             <span class="cell__idx mono">01</span>
             <p class="prize mono" data-prize>[X]</p>
             <div>
@@ -316,25 +314,26 @@
     <section class="section program" id="program" data-section="program" data-rail="nav.program">
       <div class="container">
         <header class="sec-head">
-          <p class="sec-head__meta mono reveal"><span data-i18n="program.eyebrow">Программа</span></p>
+          <p class="sec-head__meta reveal"><span data-i18n="program.eyebrow">Программа</span></p>
           <div class="sec-head__body">
             <h2 class="h2 reveal" data-i18n="program.title">Путь капли: от заявки до Demo Day</h2>
             <p class="sec-lead reveal" data-i18n="program.lead">Все даты и время — по Астане (UTC+5).</p>
           </div>
         </header>
         <div class="agenda">
-          <div class="agenda__head mono" aria-hidden="true">
-            <span data-i18n="program.col.date">Дата</span><span data-i18n="program.col.stage">Этап</span><span data-i18n="program.col.format">Формат</span>
-          </div>
-          <div class="agenda__river" aria-hidden="true"><div class="agenda__flow"></div></div>
+          <svg class="agenda__river" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="river-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#088a9e" /><stop offset="1" stop-color="#02b140" /></linearGradient></defs>
+            <path class="agenda__bed" d="M50 0C72 70 28 140 50 210S72 350 50 420 28 560 50 630 72 770 50 840 40 950 50 1000" />
+            <path class="agenda__flow" d="M50 0C72 70 28 140 50 210S72 350 50 420 28 560 50 630 72 770 50 840 40 950 50 1000" pathLength="1" />
+          </svg>
           <ol class="agenda__list" role="list">
-            <li class="row reveal" data-tl="reg"><span class="row__node" aria-hidden="true"></span><p class="row__date mono" data-i18n="p.1.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.1.t"></h3><p class="row__text" data-i18n="p.1.x"></p></div><span class="tag tag--online" data-i18n="tag.online"></span></li>
-            <li class="row reveal" data-tl="select"><span class="row__node" aria-hidden="true"></span><p class="row__date mono" data-i18n="p.2.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.2.t"></h3><p class="row__text" data-i18n="p.2.x"></p></div><span class="tag" data-i18n="tag.email"></span></li>
-            <li class="row reveal" data-tl="open"><span class="row__node" aria-hidden="true"></span><p class="row__date mono" data-i18n="p.3.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.3.t"></h3><p class="row__text" data-i18n="p.3.x"></p></div><span class="tag tag--online" data-i18n="tag.online"></span></li>
-            <li class="row reveal" data-tl="dev"><span class="row__node" aria-hidden="true"></span><p class="row__date mono" data-i18n="p.4.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.4.t"></h3><p class="row__text" data-i18n="p.4.x"></p></div><span class="tag tag--online" data-i18n="tag.online"></span></li>
-            <li class="row reveal" data-tl="mvp"><span class="row__node" aria-hidden="true"></span><p class="row__date mono" data-i18n="p.5.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.5.t"></h3><p class="row__text" data-i18n="p.5.x"></p></div><span class="tag tag--online" data-i18n="tag.online"></span></li>
-            <li class="row reveal" data-tl="review"><span class="row__node" aria-hidden="true"></span><p class="row__date mono" data-i18n="p.6.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.6.t"></h3><p class="row__text" data-i18n="p.6.x"></p></div><span class="tag" data-i18n="tag.experts"></span></li>
-            <li class="row row--final reveal" data-tl="demo"><span class="row__node" aria-hidden="true"></span><p class="row__date mono" data-i18n="p.7.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.7.t"></h3><p class="row__text" data-i18n="p.7.x"></p></div><span class="tag tag--offline" data-i18n="tag.offline"></span></li>
+            <li class="row reveal" data-tl="reg"><span class="row__node" aria-hidden="true"></span><div class="row__card"><p class="row__date mono" data-i18n="p.1.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.1.t"></h3><p class="row__text" data-i18n="p.1.x"></p></div><span class="tag tag--online" data-i18n="tag.online"></span></div></li>
+            <li class="row reveal" data-tl="select"><span class="row__node" aria-hidden="true"></span><div class="row__card"><p class="row__date mono" data-i18n="p.2.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.2.t"></h3><p class="row__text" data-i18n="p.2.x"></p></div><span class="tag" data-i18n="tag.email"></span></div></li>
+            <li class="row reveal" data-tl="open"><span class="row__node" aria-hidden="true"></span><div class="row__card"><p class="row__date mono" data-i18n="p.3.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.3.t"></h3><p class="row__text" data-i18n="p.3.x"></p></div><span class="tag tag--online" data-i18n="tag.online"></span></div></li>
+            <li class="row reveal" data-tl="dev"><span class="row__node" aria-hidden="true"></span><div class="row__card"><p class="row__date mono" data-i18n="p.4.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.4.t"></h3><p class="row__text" data-i18n="p.4.x"></p></div><span class="tag tag--online" data-i18n="tag.online"></span></div></li>
+            <li class="row reveal" data-tl="mvp"><span class="row__node" aria-hidden="true"></span><div class="row__card"><p class="row__date mono" data-i18n="p.5.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.5.t"></h3><p class="row__text" data-i18n="p.5.x"></p></div><span class="tag tag--online" data-i18n="tag.online"></span></div></li>
+            <li class="row reveal" data-tl="review"><span class="row__node" aria-hidden="true"></span><div class="row__card"><p class="row__date mono" data-i18n="p.6.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.6.t"></h3><p class="row__text" data-i18n="p.6.x"></p></div><span class="tag" data-i18n="tag.experts"></span></div></li>
+            <li class="row row--final reveal" data-tl="demo"><span class="row__node" aria-hidden="true"></span><div class="row__card"><p class="row__date mono" data-i18n="p.7.d"></p><div class="row__body"><h3 class="row__title" data-i18n="p.7.t"></h3><p class="row__text" data-i18n="p.7.x"></p></div><span class="tag tag--offline" data-i18n="tag.offline"></span></div></li>
           </ol>
         </div>
       </div>
@@ -344,7 +343,7 @@
     <section class="section who" id="who" data-section="who" data-rail="nav.who">
       <div class="container">
         <header class="sec-head">
-          <p class="sec-head__meta mono reveal"><span data-i18n="who.eyebrow">Кто может участвовать</span></p>
+          <p class="sec-head__meta reveal"><span data-i18n="who.eyebrow">Кто может участвовать</span></p>
           <div class="sec-head__body">
             <h2 class="h2 reveal" data-i18n="who.title">Каждая капля важна — и каждая роль тоже</h2>
           </div>
@@ -357,7 +356,7 @@
             <li class="cell reveal" style="--i:2"><svg class="icon" aria-hidden="true"><use href="#i-wave" /></svg><div><h3 class="cell__title" data-i18n="who.4.t"></h3><p class="cell__text" data-i18n="who.4.d"></p></div></li>
           </ul>
           <aside class="terms reveal" style="--i:2">
-            <h3 class="group-label mono" data-i18n="who.rules">Условия участия</h3>
+            <h3 class="group-label" data-i18n="who.rules">Условия участия</h3>
             <dl class="terms__big">
               <div><dt class="mono" data-i18n="who.r1.k"></dt><dd class="terms__num" data-i18n="who.r1.v"></dd></div>
               <div><dt class="mono" data-i18n="who.r2.k"></dt><dd class="terms__num" data-i18n="who.r2.v"></dd></div>
@@ -376,7 +375,7 @@
     <section class="section faq" id="faq" data-section="faq" data-rail="nav.faq">
       <div class="container faq__grid">
         <header class="sec-head sec-head--stack">
-          <p class="sec-head__meta mono reveal"><span data-i18n="faq.eyebrow">FAQ</span></p>
+          <p class="sec-head__meta reveal"><span data-i18n="faq.eyebrow">FAQ</span></p>
           <h2 class="h2 reveal" data-i18n="faq.title">Частые вопросы</h2>
         </header>
         <div class="faq__list" data-faq></div>
@@ -391,14 +390,14 @@
       </div>
       <div class="final__shade" aria-hidden="true"></div>
       <div class="container final__inner">
-        <p class="kicker mono reveal"><span class="kicker__dot" aria-hidden="true"></span><span data-i18n="final.eyebrow">Финальный шаг</span></p>
+        <p class="kicker reveal"><span class="kicker__dot" aria-hidden="true"></span><span data-i18n="final.eyebrow">Финальный шаг</span></p>
         <h2 class="final__title reveal" data-i18n="final.title">Твоя идея — та самая капля</h2>
         <p class="sec-lead reveal" data-i18n="final.lead"></p>
         <div class="final__panel reveal">
-          <p class="final__stage mono" data-stage-label></p>
+          <p class="final__stage" data-stage-label></p>
           <div class="timer timer--compact" data-timer></div>
           <button type="button" class="btn btn--primary btn--xl" data-register><span data-register-label data-i18n="cta.register">Зарегистрироваться</span><svg class="btn__arrow" aria-hidden="true"><use href="#i-arrow-r" /></svg></button>
-          <p class="final__deadline mono" data-i18n="final.deadline"></p>
+          <p class="final__deadline" data-i18n="final.deadline"></p>
         </div>
       </div>
     </section>
@@ -416,22 +415,22 @@
           <p class="footer__tag" data-i18n="footer.tagline">Хакатон по водным ресурсам Казахстана</p>
         </div>
         <nav class="footer__col" aria-labelledby="f-nav">
-          <h3 id="f-nav" class="group-label mono" data-i18n="footer.nav">Навигация</h3>
+          <h3 id="f-nav" class="group-label" data-i18n="footer.nav">Навигация</h3>
           <a href="#why" data-i18n="nav.why"></a><a href="#program" data-i18n="nav.program"></a><a href="#who" data-i18n="nav.who"></a><a href="#partners" data-i18n="nav.partners"></a><a href="#faq" data-i18n="nav.faq"></a>
         </nav>
         <div class="footer__col">
-          <h3 class="group-label mono" data-i18n="footer.contacts">Контакты</h3>
+          <h3 class="group-label" data-i18n="footer.contacts">Контакты</h3>
           <a href="mailto:hello@example.kz" data-contact-email><svg class="icon icon--sm" aria-hidden="true"><use href="#i-mail" /></svg><span>hello@example.kz</span></a>
           <a href="#" data-contact-tg target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-tg" /></svg><span>Telegram</span></a>
         </div>
         <div class="footer__col">
-          <h3 class="group-label mono" data-i18n="footer.docs">Документы</h3>
+          <h3 class="group-label" data-i18n="footer.docs">Документы</h3>
           <a href="#" data-doc="privacy" data-i18n="footer.privacy">Политика конфиденциальности</a>
           <a href="#" data-doc="rules" data-i18n="footer.rules">Правила участия</a>
         </div>
       </div>
       <p class="footer__word" aria-hidden="true">Every Drop.</p>
-      <div class="footer__bottom mono">
+      <div class="footer__bottom">
         <p data-i18n="footer.rights">© 2026 Water Innovation Hackathon.</p>
         <a href="#top" class="footer__top" data-i18n="footer.top">Наверх</a>
       </div>
