@@ -12,7 +12,7 @@
 .reg__close { position: absolute; top: 16px; right: 16px; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; box-shadow: inset 0 0 0 1px var(--line-2); cursor: pointer; }
 .reg__close svg { width: 18px; height: 18px; fill: none; stroke: var(--text); stroke-width: 1.8; stroke-linecap: round; }
 .reg__close:hover { box-shadow: inset 0 0 0 1px var(--line-3); }
-.reg__title { margin: 0; padding-right: 52px; font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.8vw, 42px); letter-spacing: -0.015em; line-height: 1.05; }
+.reg__title { margin: 0; padding-right: 52px; font-family: var(--font-display); font-weight: 300; font-size: clamp(30px, 3.8vw, 42px); letter-spacing: -0.04em; line-height: 1.05; }
 .reg__lead { margin-top: 12px; color: var(--text-2); }
 
 .steps { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
@@ -89,7 +89,7 @@ select.input option { background: var(--ink-1); }
 .success-drop svg { width: 100%; height: 100%; overflow: visible; }
 .success-drop__ring { position: absolute; bottom: 0; left: 50%; width: 120px; height: 28px; margin-left: -60px; border-radius: 50%; box-shadow: 0 0 0 1px var(--brand); animation: success-ring 2.4s var(--ease) infinite; }
 @keyframes success-ring { from { transform: scale(0.2); opacity: 1; } to { transform: scale(1.5); opacity: 0; } }
-.reg__success h2 { margin: 8px 0 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.6vw, 40px); letter-spacing: -0.015em; }
+.reg__success h2 { margin: 8px 0 0; font-family: var(--font-display); font-weight: 300; font-size: clamp(30px, 3.6vw, 40px); letter-spacing: -0.04em; }
 .reg__success p { max-width: 46ch; color: var(--text-2); }
 .reg__success .btn { margin-top: 18px; }
 

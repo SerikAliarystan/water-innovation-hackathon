@@ -51,13 +51,21 @@ p { margin: 0; }
 .h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(36px, 5vw, 72px);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
-.h2 em, .final__title em { font-style: italic; color: var(--aqua); }
+/* акцент в заголовках: «текучий» курсив с переливом воды */
+.h2 em, .final__title em, .hero__accent em {
+  font-family: var(--font-accent); font-style: italic; font-weight: 600; letter-spacing: -0.01em;
+  font-size: 1.12em; line-height: 0.9; padding-right: 0.05em;
+  background: linear-gradient(95deg, var(--aqua) 0%, var(--aqua-hi) 45%, var(--brand) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+h1, h2, h3, p, li, dd { hyphens: manual; overflow-wrap: break-word; }
+p, li, dd { text-wrap: pretty; }
 .sec-lead {
   max-width: 54ch; margin-top: 22px;
   font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; color: var(--text-2); text-wrap: pretty;

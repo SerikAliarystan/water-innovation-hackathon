@@ -39,8 +39,9 @@
 
   --danger: #c53b37;
 
-  /* антиква для заголовков, гротеск для текста, моно — только цифры и даты */
-  --font-display: 'Noto Serif Display', 'PT Serif', Georgia, 'Times New Roman', serif;
+  /* заголовки — Geologica, акценты — курсивная антиква, текст — Manrope, моно — только цифры и даты */
+  --font-display: 'Geologica', 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-accent: 'Cormorant Garamond', 'PT Serif', Georgia, serif;
   --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-cond: 'Oswald', 'Arial Narrow', sans-serif;

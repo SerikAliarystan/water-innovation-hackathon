@@ -46,7 +46,7 @@ export const dict = {
     'track.5': 'Умное орошение',
     'track.6': 'Спутниковый мониторинг',
 
-    'cd.title': 'Каждая секунда на счету. Как и каждая капля.',
+    'cd.title': 'Каждая секунда на счету. *Как и каждая капля.*',
     'cd.days': 'дней',
     'cd.hours': 'часов',
     'cd.minutes': 'минут',
@@ -68,7 +68,7 @@ export const dict = {
     'stage.done.note': 'Спасибо каждой капле, из которых сложилась эта река.',
 
     'partners.eyebrow': 'Организаторы и партнёры',
-    'partners.title': 'Вместе за каждую каплю',
+    'partners.title': 'Вместе за *каждую каплю*',
     'partners.lead': 'Объединяем усилия государства, бизнеса и технологического сообщества, чтобы создавать инновационные решения для сохранения водных ресурсов.',
     'partners.group.org': 'Организаторы и партнёры',
     'partners.group.media': 'Медиапартнёр',
@@ -78,7 +78,7 @@ export const dict = {
     'partners.kursiv.role': 'Деловое медиа',
 
     'why.eyebrow': 'Почему участвовать',
-    'why.title': 'Твоя идея может изменить то, как страна бережёт воду',
+    'why.title': 'Твоя идея может изменить то, *как страна бережёт воду*',
     'why.1.t': 'Призовой фонд',
     'why.1.d': 'Лучшие команды получат денежные призы — и признание отрасли.',
     'why.2.t': 'Реальные задачи отрасли',
@@ -93,7 +93,7 @@ export const dict = {
     'why.6.d': 'Новые знакомства, сильный кейс в портфолио и шанс, что проект заметят партнёры.',
 
     'program.eyebrow': 'Программа',
-    'program.title': 'Путь капли: от заявки до Demo Day',
+    'program.title': 'Путь капли: *от заявки до Demo Day*',
     'program.lead': 'Все даты и время — по Астане (UTC+5).',
     'tag.online': 'Онлайн',
     'tag.offline': 'Офлайн · Астана',
@@ -122,7 +122,7 @@ export const dict = {
     'p.7.x': 'Астана, площадка Министерства водных ресурсов и ирригации РК (адрес объявим позже). Капитан выступает офлайн или онлайн.',
 
     'who.eyebrow': 'Кто может участвовать',
-    'who.title': 'Каждая капля важна — и каждая роль тоже',
+    'who.title': 'Каждая капля важна — *и каждая роль тоже*',
     'who.1.t': 'Разработчики',
     'who.1.d': 'Backend, frontend, mobile, IoT и embedded.',
     'who.2.t': 'Data & AI',
@@ -144,7 +144,7 @@ export const dict = {
     'who.r5.v': 'Финалисты — за свой счёт',
 
     'faq.eyebrow': 'FAQ',
-    'faq.title': 'Частые вопросы',
+    'faq.title': 'Частые *вопросы*',
     'faq.1.q': 'Сколько стоит участие?',
     'faq.1.a': 'Участие бесплатное. Проезд и проживание финалистов на Demo Day в Астане — за счёт участников. Капитан может выступить и онлайн.',
     'faq.2.q': 'Можно ли участвовать одному?',
@@ -165,7 +165,7 @@ export const dict = {
     'faq.9.a': '27 ноября эксперты оценивают все MVP и выбирают 10 команд, которые выступят на Demo Day.',
 
     'final.eyebrow': 'Финальный шаг',
-    'final.title': 'Твоя идея — та самая капля',
+    'final.title': 'Твоя идея — *та самая капля*',
     'final.lead': 'Из капель складываются реки. Собери команду, выбери направление и подай заявку до 18 ноября.',
 
     'footer.tagline': 'Хакатон по водным ресурсам Казахстана',
@@ -287,7 +287,7 @@ export const dict = {
     'track.5': 'Ақылды суару',
     'track.6': 'Спутниктік мониторинг',
 
-    'cd.title': 'Әр секунд маңызды. Әр тамшы секілді.',
+    'cd.title': 'Әр секунд маңызды. *Әр тамшы секілді.*',
     'cd.days': 'күн',
     'cd.hours': 'сағат',
     'cd.minutes': 'минут',
@@ -309,7 +309,7 @@ export const dict = {
     'stage.done.note': 'Осы өзенді құраған әр тамшыға рахмет.',
 
     'partners.eyebrow': 'Ұйымдастырушылар мен серіктестер',
-    'partners.title': 'Әр тамшы үшін — бірге',
+    'partners.title': 'Әр тамшы үшін — *бірге*',
     'partners.lead': 'Су ресурстарын сақтайтын инновациялық шешімдер жасау үшін мемлекеттің, бизнестің және технологиялық қауымдастықтың күшін біріктіреміз.',
     'partners.group.org': 'Ұйымдастырушылар мен серіктестер',
     'partners.group.media': 'Ақпараттық серіктес',
@@ -319,7 +319,7 @@ export const dict = {
     'partners.kursiv.role': 'Іскерлік медиа',
 
     'why.eyebrow': 'Неге қатысу керек',
-    'why.title': 'Сенің идеяң елдің суды қалай сақтайтынын өзгерте алады',
+    'why.title': 'Сенің идеяң *елдің суды қалай сақтайтынын* өзгерте алады',
     'why.1.t': 'Жүлде қоры',
     'why.1.d': 'Үздік командалар ақшалай жүлде мен сала мойындауын алады.',
     'why.2.t': 'Саланың нақты міндеттері',
@@ -334,7 +334,7 @@ export const dict = {
     'why.6.d': 'Жаңа таныстар, портфолиоға мықты кейс және жобаңды серіктестердің байқау мүмкіндігі.',
 
     'program.eyebrow': 'Бағдарлама',
-    'program.title': 'Тамшының жолы: өтінімнен Demo Day-ге дейін',
+    'program.title': 'Тамшының жолы: *өтінімнен Demo Day-ге дейін*',
     'program.lead': 'Барлық күн мен уақыт — Астана уақытымен (UTC+5).',
     'tag.online': 'Онлайн',
     'tag.offline': 'Офлайн · Астана',
@@ -363,7 +363,7 @@ export const dict = {
     'p.7.x': 'Астана, ҚР Су ресурстары және ирригация министрлігінің алаңы (мекенжайы кейін жарияланады). Капитан офлайн немесе онлайн сөйлейді.',
 
     'who.eyebrow': 'Кімдер қатыса алады',
-    'who.title': 'Әр тамшы маңызды — әр рөл де',
+    'who.title': 'Әр тамшы маңызды — *әр рөл де*',
     'who.1.t': 'Әзірлеушілер',
     'who.1.d': 'Backend, frontend, mobile, IoT және embedded.',
     'who.2.t': 'Data & AI',
@@ -385,7 +385,7 @@ export const dict = {
     'who.r5.v': 'Финалистер өз есебінен',
 
     'faq.eyebrow': 'FAQ',
-    'faq.title': 'Жиі қойылатын сұрақтар',
+    'faq.title': 'Жиі қойылатын *сұрақтар*',
     'faq.1.q': 'Қатысу қанша тұрады?',
     'faq.1.a': 'Қатысу тегін. Финалистердің Астанадағы Demo Day-ге жол және тұру шығыны — қатысушылардың өз есебінен. Капитан онлайн да сөйлей алады.',
     'faq.2.q': 'Жалғыз қатысуға бола ма?',
@@ -406,7 +406,7 @@ export const dict = {
     'faq.9.a': '27 қарашада сарапшылар барлық MVP-ді бағалап, Demo Day-де сөйлейтін 10 команданы таңдайды.',
 
     'final.eyebrow': 'Соңғы қадам',
-    'final.title': 'Сенің идеяң — дәл сол тамшы',
+    'final.title': 'Сенің идеяң — *дәл сол тамшы*',
     'final.lead': 'Тамшыдан өзен құралады. Команда жина, бағыт таңда және 18 қарашаға дейін өтінім бер.',
 
     'footer.tagline': 'Қазақстанның су ресурстарына арналған хакатон',
@@ -528,7 +528,7 @@ export const dict = {
     'track.5': 'Smart irrigation',
     'track.6': 'Satellite monitoring',
 
-    'cd.title': 'Every second counts. Just like every drop.',
+    'cd.title': 'Every second counts. *Just like every drop.*',
     'cd.days': 'days',
     'cd.hours': 'hours',
     'cd.minutes': 'minutes',
@@ -550,7 +550,7 @@ export const dict = {
     'stage.done.note': 'Thank you to every drop that made this river.',
 
     'partners.eyebrow': 'Organizers & partners',
-    'partners.title': 'Together for every drop',
+    'partners.title': 'Together for *every drop*',
     'partners.lead': 'We unite government, business and the tech community to create innovative solutions that preserve water resources.',
     'partners.group.org': 'Organizers & partners',
     'partners.group.media': 'Media partner',
@@ -560,7 +560,7 @@ export const dict = {
     'partners.kursiv.role': 'Business media',
 
     'why.eyebrow': 'Why join',
-    'why.title': 'Your idea can change how a country saves its water',
+    'why.title': 'Your idea can change *how a country saves its water*',
     'why.1.t': 'Prize pool',
     'why.1.d': 'The best teams win cash prizes — and recognition from the industry.',
     'why.2.t': 'Real industry challenges',
@@ -575,7 +575,7 @@ export const dict = {
     'why.6.d': 'New connections, a strong portfolio case and a chance to get noticed by partners.',
 
     'program.eyebrow': 'Program',
-    'program.title': 'The path of a drop: from application to Demo Day',
+    'program.title': 'The path of a drop: *from application to Demo Day*',
     'program.lead': 'All dates and times are Astana time (UTC+5).',
     'tag.online': 'Online',
     'tag.offline': 'Offline · Astana',
@@ -604,7 +604,7 @@ export const dict = {
     'p.7.x': 'Astana, at the Ministry of Water Resources and Irrigation (address to be announced). The captain pitches offline or online.',
 
     'who.eyebrow': 'Who can join',
-    'who.title': 'Every drop matters — and so does every role',
+    'who.title': 'Every drop matters — *and so does every role*',
     'who.1.t': 'Developers',
     'who.1.d': 'Backend, frontend, mobile, IoT and embedded.',
     'who.2.t': 'Data & AI',
@@ -626,7 +626,7 @@ export const dict = {
     'who.r5.v': 'Covered by finalists',
 
     'faq.eyebrow': 'FAQ',
-    'faq.title': 'Frequently asked questions',
+    'faq.title': 'Frequently asked *questions*',
     'faq.1.q': 'How much does it cost?',
     'faq.1.a': 'Participation is free. Finalists cover their own travel and accommodation for Demo Day in Astana. The captain can also pitch online.',
     'faq.2.q': 'Can I join solo?',
@@ -647,7 +647,7 @@ export const dict = {
     'faq.9.a': 'On November 27, experts review every MVP and select 10 teams to pitch on Demo Day.',
 
     'final.eyebrow': 'Final step',
-    'final.title': 'Your idea is that drop',
+    'final.title': 'Your idea is *that drop*',
     'final.lead': 'Drops become rivers. Build your team, choose a track and apply by November 18.',
 
     'footer.tagline': 'A hackathon for Kazakhstan’s water resources',

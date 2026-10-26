@@ -84,7 +84,7 @@
 .cell:hover, .partner:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
 .cell:hover::before, .partner:hover::before { opacity: 1; }
 .cell .icon { margin-bottom: auto; }
-.cell__title { margin: 0 0 10px; font-family: var(--font-display); font-weight: 500; font-size: clamp(21px, 1.8vw, 26px); line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; }
+.cell__title { margin: 0 0 10px; font-family: var(--font-display); font-weight: 400; font-size: clamp(21px, 1.8vw, 26px); line-height: 1.15; letter-spacing: -0.03em; text-wrap: balance; }
 .cell__text { color: var(--text-2); font-size: 15px; line-height: 1.6; text-wrap: pretty; }
 
 .ring-burst {
