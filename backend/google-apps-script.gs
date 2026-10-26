@@ -44,10 +44,10 @@ function doPost(e) {
 
     const members = d.members.map((m) => `${m.name} <${m.email}>, ${m.age}${m.org ? ', ' + m.org : ''}${m.role ? ' — ' + m.role : ''}`).join('\n');
     sheet.appendRow([
-      new Date(), d.submissionId, d.lang, d.team.teamName, d.team.captainName, d.team.captainEmail,
-      "'" + d.team.phone, d.team.city, d.members.length, members,
-      d.idea.projectName, d.idea.track, d.idea.idea, d.idea.link,
-      d.consents.personalData, d.consents.rules,
+      new Date(), cell(d.submissionId), cell(d.lang), cell(d.team.teamName), cell(d.team.captainName), cell(d.team.captainEmail),
+      "'" + String(d.team.phone), cell(d.team.city), d.members.length, cell(members),
+      cell(d.idea.projectName), cell(d.idea.track), cell(d.idea.idea), cell(d.idea.link),
+      d.consents.personalData === true, d.consents.rules === true,
     ]);
 
     const m = MAIL[d.lang] || MAIL.ru;
@@ -89,6 +89,12 @@ function getSheet() {
     sh.setFrozenRows(1);
   }
   return sh;
+}
+
+// Защита от формул в таблице: значение, начинающееся с = + - @ или таба/CR, сохраняется как текст
+function cell(v) {
+  const s = String(v == null ? '' : v);
+  return /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
 }
 
 function json(obj) {
