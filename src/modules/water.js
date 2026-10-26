@@ -73,21 +73,21 @@ void main() {
   float cs = caustic(q * 4.2 + vec2(n * 0.6), t * 1.2);
 
   // Цвета: глубина → лагуна, блики циана, бренд-зелень у дна
-  vec3 abyss = vec3(0.012, 0.03, 0.04);
-  vec3 lagoon = vec3(0.04, 0.16, 0.19);
-  vec3 cyan = vec3(0.5, 0.86, 0.9);
-  vec3 brand = vec3(0.102, 0.886, 0.463);
+  // Светлая вода: вид на дно мелкой прозрачной воды
+  vec3 deep = vec3(0.62, 0.85, 0.87);
+  vec3 shallow = vec3(0.94, 0.978, 0.978);
+  vec3 teal = vec3(0.03, 0.45, 0.52);
+  vec3 brand = vec3(0.008, 0.694, 0.251);
 
   float vy = mix(uv.y, 1.0 - uv.y, uLake);
-  float depth = smoothstep(0.0, 1.0, vy * 0.9 + n * 0.25);
-  vec3 col = mix(abyss, lagoon, depth);
-  col += cyan * cs * (0.10 + 0.14 * depth);
-  col += brand * cs * 0.05 * (1.0 - vy);
-  col += mix(cyan, brand, 0.35) * min(rings, 1.0) * 0.30;
-  col += cyan * glow * 0.10;
-  // световой столб сверху справа
+  float depth = smoothstep(0.0, 1.0, vy * 0.85 + n * 0.3);
+  vec3 col = mix(deep, shallow, depth);
+  col = mix(col, vec3(1.0), cs * (0.45 + 0.25 * (1.0 - depth)));   // блики каустики
+  col = mix(col, brand, cs * 0.05 * (1.0 - vy));                   // зелёный отсвет у дна
+  col = mix(col, teal, min(rings, 1.0) * 0.22);                    // кольца ряби
+  col = mix(col, vec3(1.0), glow * 0.22);                          // свет под курсором
   float beam = exp(-pow((uv.x - 0.72 - (uv.y - 1.0) * 0.25) * 3.2, 2.0)) * smoothstep(0.1, 1.0, uv.y) * (1.0 - uLake);
-  col += vec3(0.6, 0.95, 1.0) * beam * 0.06;
+  col = mix(col, vec3(1.0), beam * 0.18);                          // солнечный столб
   // зерно, чтобы не было бандинга
   col += (hash(gl_FragCoord.xy + uTime) - 0.5) * 0.012;
 

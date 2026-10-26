@@ -1,13 +1,13 @@
 /* Форма регистрации (модальное окно) */
 .reg { width: min(760px, 100%); max-width: 100%; max-height: 100dvh; margin: auto; padding: 0; border: 0; background: transparent; color: var(--text); overflow: visible; }
-.reg::backdrop { background: rgba(3, 6, 8, 0.74); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.reg::backdrop { background: rgba(var(--fg-rgb), 0.32); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 .reg[open] { animation: reg-in 0.45s var(--ease); }
 @keyframes reg-in { from { opacity: 0; transform: translateY(16px); } }
 .reg__panel {
   position: relative; max-height: min(92dvh, 900px); overflow: auto; overscroll-behavior: contain;
   padding: clamp(24px, 4vw, 44px); border-radius: var(--r-3);
-  background: linear-gradient(180deg, var(--ink-2), var(--ink-1) 40%);
-  box-shadow: inset 0 0 0 1px var(--line-2), 0 40px 120px -20px rgba(0, 0, 0, 0.8);
+  background: linear-gradient(180deg, var(--ink-2), var(--ink-1) 30%);
+  box-shadow: inset 0 0 0 1px var(--line-2), 0 40px 120px -20px rgba(var(--fg-rgb), 0.22);
 }
 .reg__close { position: absolute; top: 16px; right: 16px; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; box-shadow: inset 0 0 0 1px var(--line-2); cursor: pointer; }
 .reg__close svg { width: 18px; height: 18px; fill: none; stroke: var(--text); stroke-width: 1.8; stroke-linecap: round; }
@@ -33,13 +33,13 @@
 .field .opt { font-weight: 400; color: var(--text-3); }
 .input {
   width: 100%; min-height: 50px; padding: 13px 15px; border: 0; border-radius: 10px;
-  background: var(--ink-0); box-shadow: inset 0 0 0 1px var(--line-2); color: var(--text); font-size: 16px;
+  background: var(--ink-1); box-shadow: inset 0 0 0 1px var(--line-2); color: var(--text); font-size: 16px;
   transition: box-shadow var(--dur-1);
 }
-.input::placeholder { color: #56686c; }
+.input::placeholder { color: var(--text-3); }
 .input:hover { box-shadow: inset 0 0 0 1px var(--line-3); }
-.input:focus { outline: none; box-shadow: inset 0 0 0 1px var(--brand), 0 0 0 4px rgba(26, 226, 118, 0.14); }
-.input[aria-invalid='true'] { box-shadow: inset 0 0 0 1px var(--danger), 0 0 0 4px rgba(255, 138, 128, 0.1); }
+.input:focus { outline: none; box-shadow: inset 0 0 0 1px var(--brand), 0 0 0 4px rgba(var(--brand-rgb), 0.14); }
+.input[aria-invalid='true'] { box-shadow: inset 0 0 0 1px var(--danger), 0 0 0 4px rgba(var(--danger-rgb), 0.1); }
 textarea.input { min-height: 120px; resize: vertical; line-height: 1.5; }
 select.input {
   appearance: none; padding-right: 44px;
@@ -55,7 +55,7 @@ select.input option { background: var(--ink-1); }
 .member { display: grid; gap: 16px; padding: 20px; border-radius: var(--r-2); box-shadow: inset 0 0 0 1px var(--line); }
 .member__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .member__title { margin: 0; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--aqua); }
-.member--captain .member__title { color: var(--brand); }
+.member--captain .member__title { color: var(--brand-deep); }
 .icon-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 0; border-radius: 8px; background: transparent; box-shadow: inset 0 0 0 1px var(--line); color: var(--text-2); font-size: 13px; cursor: pointer; }
 .icon-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
 .icon-btn:hover:not(:disabled) { color: var(--danger); box-shadow: inset 0 0 0 1px var(--danger); }
@@ -76,7 +76,7 @@ select.input option { background: var(--ink-1); }
 .summary__row { display: grid; grid-template-columns: 160px 1fr; gap: 12px; }
 .summary__row dt { padding-top: 2px; font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
 .summary__row dd { margin: 0; word-break: break-word; }
-.reg__alert { padding: 12px 16px; border-radius: 10px; background: rgba(255, 138, 128, 0.08); box-shadow: inset 0 0 0 1px rgba(255, 138, 128, 0.35); color: #ffd3cf; font-size: 14px; }
+.reg__alert { padding: 12px 16px; border-radius: 10px; background: rgba(var(--danger-rgb), 0.08); box-shadow: inset 0 0 0 1px rgba(var(--danger-rgb), 0.35); color: var(--danger); font-size: 14px; }
 .reg__alert:empty { display: none; }
 .reg__nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); }
 .reg__nav .btn--primary { margin-left: auto; }

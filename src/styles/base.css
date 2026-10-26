@@ -31,7 +31,7 @@ p { margin: 0; }
   outline-offset: 3px;
   border-radius: 6px;
 }
-::selection { background: rgba(26, 226, 118, 0.3); color: #fff; }
+::selection { background: rgba(var(--brand-rgb), 0.3); color: #fff; }
 
 .sr-only {
   position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;

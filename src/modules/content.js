@@ -9,7 +9,7 @@ const FAQ_COUNT = 9;
 export function renderFaq() {
   $('[data-faq]').innerHTML = Array.from({ length: FAQ_COUNT }, (_, i) => `
     <details class="qa reveal" style="--i:${Math.min(i, 4)}">
-      <summary><span class="qa__num">Q${String(i + 1).padStart(2, '0')}</span><span data-i18n="faq.${i + 1}.q"></span><span class="qa__icon" aria-hidden="true"></span></summary>
+      <summary><span class="qa__num" aria-hidden="true"></span><span data-i18n="faq.${i + 1}.q"></span><span class="qa__icon" aria-hidden="true"></span></summary>
       <div class="qa__a"><div><p data-i18n="faq.${i + 1}.a"></p></div></div>
     </details>`).join('');
 }
