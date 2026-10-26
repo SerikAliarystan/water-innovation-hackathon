@@ -17,7 +17,7 @@ uniform float uTime;
 uniform vec2 uPointer;
 uniform vec4 uRipples[${MAX_RIPPLES}]; // xy — позиция (0..1), z — время старта, w — сила
 uniform float uLake; // 1 — финальное «озеро»: свет снизу, а не сверху
-uniform float uDark; // 0 — светлая тема, 1 — тёмная (плавный переход)
+uniform float uDark; // 0 — светлая тема, 1 — тёмная
 
 float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float noise(vec2 p) {
@@ -108,7 +108,7 @@ void main() {
 export function initWater(container, { reducedMotion, lake = false } = {}) {
   const canvas = container.querySelector('.water__canvas');
   const section = container.parentElement; // секция принимает события указателя
-  const api = { ripple() {}, setDark() {}, ok: false };
+  const api = { ripple() {}, ok: false };
   if (!canvas || reducedMotion) return api;
 
   let gl;
@@ -146,10 +146,8 @@ export function initWater(container, { reducedMotion, lake = false } = {}) {
   const uPointer = gl.getUniformLocation(prog, 'uPointer');
   const uRipples = gl.getUniformLocation(prog, 'uRipples');
   gl.uniform1f(gl.getUniformLocation(prog, 'uLake'), lake ? 1 : 0);
-  const uDark = gl.getUniformLocation(prog, 'uDark');
-  let dark = document.documentElement.dataset.theme === 'dark' ? 1 : 0;
-  let darkT = dark;
-  api.setDark = (on) => { darkT = on ? 1 : 0; };
+  // тема сайта задаётся атрибутом data-theme на <html>
+  gl.uniform1f(gl.getUniformLocation(prog, 'uDark'), document.documentElement.dataset.theme === 'dark' ? 1 : 0);
 
   const ripples = new Float32Array(MAX_RIPPLES * 4);
   let rIdx = 0;
@@ -217,8 +215,6 @@ export function initWater(container, { reducedMotion, lake = false } = {}) {
     pointer.x += (pointer.tx - pointer.x) * 0.06;
     pointer.y += (pointer.ty - pointer.y) * 0.06;
     gl.uniform2f(uRes, canvas.width, canvas.height);
-    dark += (darkT - dark) * 0.08; // плавная смена темы
-    gl.uniform1f(uDark, dark);
     gl.uniform1f(uTime, now());
     gl.uniform2f(uPointer, pointer.x, pointer.y);
     gl.uniform4fv(uRipples, ripples);

@@ -323,6 +323,13 @@ html[lang='kk'] .partner__name--ministry { display: none; } /* на казахс
   .final__panel { padding: 18px 14px; }
   .btn--xl { --h: 58px; font-size: 16px; padding: 0 28px; }
 }
+html[data-theme='dark'] .water__fallback {
+  background:
+    radial-gradient(60% 55% at 72% 35%, rgba(111, 207, 220, 0.2), transparent 70%),
+    radial-gradient(40% 40% at 20% 85%, rgba(var(--brand-rgb), 0.1), transparent 70%),
+    repeating-radial-gradient(circle at 70% 40%, rgba(111, 207, 220, 0.04) 0 1px, transparent 1px 26px),
+    linear-gradient(180deg, #0a3038 0%, #061e24 55%, #04161b 100%);
+}
 /* тёмная тема: «глубина» отделяется тонким контуром */
 html[data-theme='dark'] .countdown { box-shadow: inset 0 0 0 1px rgba(111, 207, 220, 0.14); }
 html[data-theme='dark'] .agenda__bed { stroke: rgba(111, 207, 220, 0.1); }

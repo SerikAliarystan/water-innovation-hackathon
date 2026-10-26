@@ -5,8 +5,6 @@ export const LANGS = ['ru', 'kk', 'en'];
 
 export const dict = {
   ru: {
-    'theme.dark': 'Тёмная тема',
-    'theme.light': 'Светлая тема',
     'hero.spec.team': 'человек в команде',
     'hero.scroll': 'Листайте',
     'cd.now': 'Сейчас',
@@ -248,8 +246,6 @@ export const dict = {
   },
 
   kk: {
-    'theme.dark': 'Қараңғы тақырып',
-    'theme.light': 'Ашық тақырып',
     'hero.spec.team': 'адамнан тұратын команда',
     'hero.scroll': 'Төмен қарай',
     'cd.now': 'Қазір',
@@ -491,8 +487,6 @@ export const dict = {
   },
 
   en: {
-    'theme.dark': 'Dark theme',
-    'theme.light': 'Light theme',
     'hero.spec.team': 'people per team',
     'hero.scroll': 'Scroll',
     'cd.now': 'Now',
