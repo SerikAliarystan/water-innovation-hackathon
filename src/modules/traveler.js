@@ -23,8 +23,10 @@ export function initTraveler({ lake }) {
     const vw = innerWidth;
     const side = vw - Math.min(96, vw * 0.08); // вне секций — у правого края, рядом со шкалой
     const pts = [];
+    // старт — у нижнего края баннера, под стеклянной каплей (не поверх текста)
     const glass = $('.glass-drop').getBoundingClientRect();
-    pts.push([docTop(glass) + glass.height, glass.left + glass.width / 2]);
+    const hr = hero.getBoundingClientRect();
+    pts.push([Math.max(docTop(glass) + glass.height, docTop(hr) + hr.height - 140), glass.left + glass.width / 2]);
     const tr = tank.getBoundingClientRect();
     pts.push([docTop(tr) + 4, vw * 0.78]);
     // река: точки самого SVG-пути в координатах документа

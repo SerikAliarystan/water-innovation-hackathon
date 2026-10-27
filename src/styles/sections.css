@@ -306,9 +306,9 @@
   .hero__bottom { grid-template-columns: 1fr; }
 }
 @media (max-width: 860px) {
-  .glass-drop { right: 4px; top: calc(var(--header-h) + 8px); translate: 0 0; width: clamp(110px, 30vw, 170px); }
+  .glass-drop { right: 0; top: 4px; width: clamp(84px, 24vw, 150px); }
   .hero__inner { justify-content: flex-end; }
-  .hero__kicker { max-width: 60%; }
+  .hero__kicker { padding-right: clamp(96px, 28vw, 170px); }
   .hero__actions .btn { flex: 1 1 auto; }
   .agenda__river { left: 0; width: 40px; translate: 0 0; }
   .row { grid-template-columns: 40px 1fr; }
