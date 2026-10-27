@@ -4,6 +4,7 @@ export const LANGS = ['ru', 'kk', 'en'];
 
 export const dict = {
   ru: {
+    'depth.unit': 'м',
     'who.r6.v': 'Бесплатно',
     'who.r6.k': 'Стоимость участия',
     'who.5.d': 'UX/UI, продуктовое мышление и презентация решения.',
@@ -252,6 +253,7 @@ export const dict = {
   },
 
   kk: {
+    'depth.unit': 'м',
     'who.r6.v': 'Тегін',
     'who.r6.k': 'Қатысу құны',
     'who.5.d': 'UX/UI, өнімдік ойлау және шешімді таныстыру.',
@@ -500,6 +502,7 @@ export const dict = {
   },
 
   en: {
+    'depth.unit': 'm',
     'who.r6.v': 'Free',
     'who.r6.k': 'Cost',
     'who.5.d': 'UX/UI, product thinking and solution pitching.',

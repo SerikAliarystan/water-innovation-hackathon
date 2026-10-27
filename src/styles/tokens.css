@@ -1,114 +1,96 @@
-/* Дизайн-токены. Светлая тема «чистая вода»: воздух, свет, прозрачность.
-   Зелёные — из логотипа Freedom (#02B140 / #164734), вода — бирюза. */
+/* «Погружение»: горное озеро (Каинды, Кольсай) — от поверхности к глубине и обратно.
+   Палитра — только вода и цвета логотипа Freedom (#02B140, #55B045, #164734). */
 :root,
 .theme-light {
   /* RGB-каналы для полупрозрачных оттенков: rgba(var(--x-rgb), a) */
-  --bg-rgb: 245, 250, 250;
-  --fg-rgb: 9, 34, 41;
+  --bg-rgb: 244, 251, 250;
+  --fg-rgb: 6, 30, 34;
   --brand-rgb: 2, 177, 64;
-  --aqua-rgb: 8, 138, 158;
+  --aqua-rgb: 10, 140, 150;
   --danger-rgb: 214, 69, 65;
 
-  /* поверхности: ink-0 — фон страницы, выше — приподнятые слои */
-  --ink-0: #f5fafa;
+  --ink-0: #f4fbfa;
   --ink-1: #ffffff;
-  --ink-2: #eaf4f4;
-  --ink-3: #d9ecee;
+  --ink-2: #e7f4f3;
+  --ink-3: #d3eae8;
 
-  /* линии и текст */
   --line: rgba(var(--fg-rgb), 0.09);
   --line-2: rgba(var(--fg-rgb), 0.15);
   --line-3: rgba(var(--fg-rgb), 0.26);
-  --text: #092229;
-  --text-2: #43585e;
-  --text-3: #6c8086;
+  --text: #061e22;
+  --text-2: #3f5a5e;
+  --text-3: #6a8387;
 
   /* бренд Freedom */
   --brand: #02b140;
-  --brand-hi: #10c552;
-  --brand-deep: #0b7d36; /* зелёный для мелкого текста на светлом (AA) */
+  --brand-hi: #1ccb57;
+  --brand-deep: #0b7d36;
+  --brand-light: #55b045;
   --brand-dark: #164734;
-  --brand-ink: #062a14;
+  --brand-ink: #03200e;
   --brand-soft: rgba(var(--brand-rgb), 0.1);
 
   /* вода */
-  --aqua: #088a9e;
-  --aqua-hi: #7fd3de;
-  --aqua-2: #0b6f80;
+  --aqua: #0a8c96;
+  --aqua-hi: #7fe3dc;
+  --aqua-2: #0b6c75;
   --aqua-soft: rgba(var(--aqua-rgb), 0.08);
+  --foam: #d7fbf7;
 
   --danger: #c53b37;
 
-  /* заголовки — Geologica, акценты — курсивная антиква, текст — Manrope, моно — только цифры и даты */
-  --font-display: 'Geologica', 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-  --font-accent: 'Cormorant Garamond', 'PT Serif', Georgia, serif;
-  --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* шрифты: узкий плакатный гротеск + контрастный курсив + текст + моно для цифр */
+  --font-display: 'Sofia Sans Extra Condensed', 'Oswald', 'Arial Narrow', sans-serif;
+  --font-accent: 'Playfair', 'Playfair Display', Georgia, serif;
+  --font-body: 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-mono: 'Fragment Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-cond: 'Oswald', 'Arial Narrow', sans-serif;
 
   --r-1: 10px;
-  --r-2: 18px;
-  --r-3: 28px;
+  --r-2: 16px;
+  --r-3: 24px;
 
   --glass: rgba(255, 255, 255, 0.66);
   --glass-edge: rgba(255, 255, 255, 0.85);
   --shadow-1: 0 1px 2px rgba(var(--fg-rgb), 0.04), 0 8px 24px -12px rgba(var(--fg-rgb), 0.12);
   --shadow-2: 0 2px 4px rgba(var(--fg-rgb), 0.04), 0 24px 48px -20px rgba(var(--fg-rgb), 0.2);
 
-  --gutter: clamp(16px, 4vw, 48px);
-  --maxw: 1320px;
+  --gutter: clamp(16px, 4vw, 56px);
+  --maxw: 1400px;
   --header-h: 72px;
-  --section-y: clamp(80px, 9vw, 136px);
+  --section-y: clamp(96px, 11vw, 168px);
 
   --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
   --ease-in: cubic-bezier(0.55, 0, 0.9, 0.4);
   --dur-1: 0.18s;
   --dur-2: 0.35s;
-  --dur-3: 0.8s;
+  --dur-3: 0.9s;
 
   color-scheme: light;
 }
 .theme-light { color: var(--text); }
 
-/* Тёмная тема: глубокая бирюзовая вода (не «ночной синий»). Карточки партнёров
-   остаются светлыми (.theme-light), чтобы логотипы были в оригинальных цветах. */
-html[data-theme='dark'] {
-  --bg-rgb: 4, 22, 27;
-  --fg-rgb: 214, 240, 243;
-  --ink-0: #04161b;
-  --ink-1: #0a2228;
-  --ink-2: #0e2b32;
-  --ink-3: #163a43;
-  --text: #e8f4f5;
-  --text-2: #a3bfc4;
-  --text-3: #74959c;
-  --aqua: #6fcfdc;
-  --aqua-2: #8fdbe5;
-  --aqua-hi: #bdeff5;
-  --aqua-rgb: 111, 207, 220;
-  --brand-deep: #36d672;
-  --glass: rgba(10, 34, 40, 0.62);
-  --glass-edge: rgba(214, 240, 243, 0.12);
-  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 30px -14px rgba(0, 0, 0, 0.6);
-  --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.3), 0 28px 60px -24px rgba(0, 0, 0, 0.75);
-  color-scheme: dark;
-}
-
-/* «Глубина»: секция-контраст, тёмная вода посреди светлой страницы.
-   Те же компоненты, другие значения токенов. */
+/* Основная тема — тёмная глубина */
+html[data-theme='dark'],
 .theme-deep {
-  --bg-rgb: 3, 36, 44;
-  --fg-rgb: 214, 240, 243;
-  --ink-0: #032a33;
-  --ink-1: #063640;
-  --ink-2: #0a414c;
-  --ink-3: #10505c;
-  --text: #ecf8f9;
-  --text-2: #a9c8cd;
-  --text-3: #79a0a7;
-  --aqua: #7fd3de;
-  --aqua-rgb: 127, 211, 222;
-  --brand-deep: #36d672;
-  color: var(--text);
+  --bg-rgb: 1, 9, 11;
+  --fg-rgb: 215, 251, 247;
+  --aqua-rgb: 46, 230, 214;
+  --ink-0: #01090b;
+  --ink-1: #04161a;
+  --ink-2: #072227;
+  --ink-3: #0c3036;
+  --text: #e9fbf8;
+  --text-2: #a2c4c0;
+  --text-3: #6d8f8b;
+  --aqua: #2ee6d6;
+  --aqua-2: #8af0e6;
+  --aqua-hi: #c4fbf5;
+  --brand-deep: #2fd46c;
+  --glass: rgba(4, 22, 26, 0.55);
+  --glass-edge: rgba(215, 251, 247, 0.1);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 32px -16px rgba(0, 0, 0, 0.7);
+  --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.35), 0 30px 70px -28px rgba(0, 0, 0, 0.85);
   color-scheme: dark;
 }
+.theme-deep { color: var(--text); }

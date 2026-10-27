@@ -14,8 +14,20 @@
   background: var(--brand); color: var(--brand-ink);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 10px 24px -10px rgba(var(--brand-rgb), 0.7);
 }
+/* при наведении кнопка «наливается» водой снизу */
+.btn--primary::after {
+  content: ''; position: absolute; left: -10%; right: -10%; bottom: 0; height: 140%; z-index: -1; pointer-events: none;
+  background: var(--foam);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M0 10 Q25 0 50 10 T100 10 T150 10 T200 10 V20 H0Z'/%3E%3C/svg%3E") top / 50% 14px repeat-x, linear-gradient(#000, #000) 0 13px / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M0 10 Q25 0 50 10 T100 10 T150 10 T200 10 V20 H0Z'/%3E%3C/svg%3E") top / 50% 14px repeat-x, linear-gradient(#000, #000) 0 13px / 100% 100% no-repeat;
+  transform: translateY(100%); transition: transform 0.7s var(--ease);
+  animation: wave-run 1.6s linear infinite;
+}
+.btn--primary:hover::after { transform: translateY(8%); }
+.btn--primary:disabled::after, .btn--primary[aria-disabled='true']::after { display: none; }
+@keyframes wave-run { to { -webkit-mask-position: 100% 0, 0 13px; mask-position: 100% 0, 0 13px; } }
 .btn--primary:hover {
-  background: var(--brand-hi); transform: translateY(-1px);
+  transform: translateY(-1px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 0 0 6px rgba(var(--brand-rgb), 0.14), 0 16px 40px -10px rgba(var(--brand-rgb), 0.8);
 }
 .btn--primary:active { transform: none; }
@@ -41,6 +53,7 @@
   background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 70%);
   animation: ripple 0.7s var(--ease) forwards;
 }
+.btn--primary > * { position: relative; z-index: 1; }
 .btn .ripple--ring { background: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.7); animation-duration: 0.9s; }
 @keyframes ripple { to { transform: scale(36); opacity: 0; } }
 
@@ -84,7 +97,7 @@
 .cell:hover, .partner:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
 .cell:hover::before, .partner:hover::before { opacity: 1; }
 .cell .icon { margin-bottom: auto; }
-.cell__title { margin: 0 0 10px; font-family: var(--font-display); font-weight: 400; font-size: clamp(21px, 1.8vw, 26px); line-height: 1.15; letter-spacing: -0.03em; text-wrap: balance; }
+.cell__title { margin: 0 0 10px; font-family: var(--font-display); font-weight: 700; font-size: clamp(26px, 2.3vw, 34px); line-height: 0.95; text-transform: uppercase; text-wrap: balance; }
 .cell__text { color: var(--text-2); font-size: 15px; line-height: 1.6; text-wrap: pretty; }
 
 .ring-burst {
@@ -109,10 +122,7 @@
 
 /* ---------- Таймер: цифры в «капсулах» ---------- */
 .timer { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(8px, 1.4vw, 18px); }
-.timer__unit {
-  position: relative; display: grid; justify-items: center; gap: 10px; padding: clamp(18px, 2.6vw, 34px) 8px clamp(14px, 2vw, 22px);
-  border-radius: var(--r-3); background: rgba(var(--fg-rgb), 0.05); box-shadow: inset 0 0 0 1px rgba(var(--fg-rgb), 0.1);
-}
+.timer__unit { position: relative; display: grid; justify-items: start; gap: 6px; padding: 0 clamp(4px, 1vw, 12px); }
 .timer__unit + .timer__unit::before {
   /* разделитель-капля между блоками */
   content: ''; position: absolute; left: calc(clamp(8px, 1.4vw, 18px) / -2 - 4px); top: 50%; width: 8px; height: 10px; translate: 0 -50%; background: var(--brand);
@@ -120,12 +130,17 @@
 }
 .timer__digits {
   display: flex; font-family: var(--font-mono); font-weight: 400; font-variant-numeric: tabular-nums;
-  font-size: clamp(40px, 7.6vw, 112px); line-height: 0.95; letter-spacing: -0.05em; color: var(--text);
+  font-size: clamp(56px, 12vw, 210px); line-height: 0.85; letter-spacing: -0.07em; color: var(--text);
 }
 .timer__digit { position: relative; display: inline-block; }
 .timer__digit.is-drip { animation: drip 0.55s var(--ease); }
 @keyframes drip { 0% { transform: translateY(-22%); opacity: 0; } 100% { transform: none; opacity: 1; } }
-.timer__label { font-size: clamp(12px, 1.1vw, 14px); font-weight: 600; color: var(--text-3); }
+.timer__label { padding-left: 0.3em; font-family: var(--font-mono); font-size: clamp(12px, 1.1vw, 15px); color: var(--aqua); }
+.timer--inline { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.timer--inline .timer__unit { display: inline-flex; align-items: baseline; gap: 6px; padding: 0; }
+.timer--inline .timer__unit::before { display: none; }
+.timer--inline .timer__digits { font-size: clamp(26px, 2.6vw, 36px); letter-spacing: -0.04em; }
+.timer--inline .timer__label { padding: 0; font-size: 13px; color: var(--text-2); }
 .timer--compact .timer__digits { font-size: clamp(32px, 5vw, 64px); }
 
 /* ---------- Пульс ---------- */

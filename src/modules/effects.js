@@ -76,3 +76,25 @@ export function initCursor() {
   };
   loop();
 }
+
+// Заголовки «под водой»: при наведении буквы колышутся (SVG-фильтр искажения) и успокаиваются
+export function initRippleText() {
+  if (reducedMotion || !finePointer) return;
+  const disp = $('[data-water-disp]');
+  if (!disp) return;
+  let active = null, start = 0, raf = 0;
+  const step = (t) => {
+    const k = (t - start) / 1400;
+    const scale = k < 1 ? Math.sin(Math.min(k * 3, 1) * Math.PI / 2) * 14 * (1 - k) : 0;
+    disp.setAttribute('scale', scale.toFixed(2));
+    if (k < 1) raf = requestAnimationFrame(step);
+    else { active?.classList.remove('is-rippling'); active = null; raf = 0; }
+  };
+  $$('[data-ripple-text]').forEach((el) => el.addEventListener('pointerenter', () => {
+    if (active && active !== el) active.classList.remove('is-rippling');
+    active = el;
+    el.classList.add('is-rippling');
+    start = performance.now();
+    if (!raf) raf = requestAnimationFrame(step);
+  }));
+}

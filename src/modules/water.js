@@ -11,13 +11,18 @@ void main() { gl_Position = vec4(aPos, 0.0, 1.0); }
 `;
 
 const FRAG = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
 precision mediump float;
+#endif
 uniform vec2 uRes;
 uniform float uTime;
 uniform vec2 uPointer;
 uniform vec4 uRipples[${MAX_RIPPLES}]; // xy — позиция (0..1), z — время старта, w — сила
-uniform float uLake; // 1 — финальное «озеро»: свет снизу, а не сверху
-uniform float uDark; // 0 — светлая тема, 1 — тёмная
+uniform float uLake;                   // 1 — финальное «озеро»: свет снизу
+uniform vec4 uDrop;                    // стеклянная капля: x, y (низ-лево), ширина, высота — в долях холста; z = 0 — капли нет
+uniform sampler2D uMask;               // размытая маска формы капли (альфа)
 
 float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float noise(vec2 p) {
@@ -36,9 +41,26 @@ float caustic(vec2 p, float t) {
     i = p + vec2(cos(tt - i.x) + sin(tt + i.y), sin(tt - i.y) + cos(tt + i.x));
     c += 1.0 / length(vec2(p.x / (sin(i.x + tt) / inten), p.y / (cos(i.y + tt) / inten)));
   }
-  c /= 4.0;
+  c = clamp(c / 4.0, 0.0, 4.0); // без переполнения в mediump (иначе NaN — чёрные пиксели)
   c = 1.17 - pow(c, 1.4);
   return clamp(pow(abs(c), 8.0), 0.0, 1.0);
+}
+
+// Вода горного озера (Каинды): бездна → бирюза, светящаяся каустика, отсвет Freedom-зелёного у дна
+vec3 scene(vec2 p, float vy, vec2 disp, float rings, float glow) {
+  vec2 q = p + disp;
+  float t = uTime * 0.35;
+  float n = noise(q * 3.0 + t * 0.4) * 0.5 + noise(q * 7.0 - t * 0.3) * 0.25;
+  float cs = caustic(q * 4.2 + vec2(n * 0.6), t * 1.2);
+  float depth = smoothstep(0.0, 1.0, vy * 0.9 + n * 0.3);
+  vec3 turq = vec3(0.18, 0.9, 0.84);
+  vec3 brand = vec3(0.008, 0.694, 0.251);
+  vec3 col = mix(vec3(0.004, 0.03, 0.04), vec3(0.02, 0.19, 0.21), depth);
+  col += turq * cs * (0.1 + 0.2 * depth);
+  col += brand * cs * 0.08 * (1.0 - vy);
+  col += mix(turq, brand, 0.3) * min(rings, 1.0) * 0.35;
+  col += turq * glow * 0.12;
+  return col;
 }
 
 void main() {
@@ -63,49 +85,64 @@ void main() {
     rings += abs(wave);
   }
 
-  // Мягкая реакция на курсор
   vec2 pp = vec2(uPointer.x * aspect, uPointer.y);
   float pd = length(p - pp);
   float glow = exp(-pd * pd * 9.0);
-
-  vec2 q = p + disp;
-  float t = uTime * 0.35;
-  float n = noise(q * 3.0 + t * 0.4) * 0.5 + noise(q * 7.0 - t * 0.3) * 0.25;
-  float cs = caustic(q * 4.2 + vec2(n * 0.6), t * 1.2);
-
-  // Цвета: глубина → лагуна, блики циана, бренд-зелень у дна
-  // Светлая вода: вид на дно мелкой прозрачной воды
-  vec3 deep = vec3(0.62, 0.85, 0.87);
-  vec3 shallow = vec3(0.94, 0.978, 0.978);
-  vec3 teal = vec3(0.03, 0.45, 0.52);
-  vec3 brand = vec3(0.008, 0.694, 0.251);
-
   float vy = mix(uv.y, 1.0 - uv.y, uLake);
-  float depth = smoothstep(0.0, 1.0, vy * 0.85 + n * 0.3);
-  vec3 col = mix(deep, shallow, depth);
-  col = mix(col, vec3(1.0), cs * (0.45 + 0.25 * (1.0 - depth)));   // блики каустики
-  col = mix(col, brand, cs * 0.05 * (1.0 - vy));                   // зелёный отсвет у дна
-  col = mix(col, teal, min(rings, 1.0) * 0.22);                    // кольца ряби
-  col = mix(col, vec3(1.0), glow * 0.22);                          // свет под курсором
-  float beam = exp(-pow((uv.x - 0.72 - (uv.y - 1.0) * 0.25) * 3.2, 2.0)) * smoothstep(0.1, 1.0, uv.y) * (1.0 - uLake);
-  col = mix(col, vec3(1.0), beam * 0.18);                          // солнечный столб
 
-  // Тёмная вода: глубина с бирюзовыми бликами
-  vec3 cyan = vec3(0.45, 0.85, 0.9);
-  vec3 dark = mix(vec3(0.01, 0.05, 0.065), vec3(0.03, 0.15, 0.18), depth);
-  dark += cyan * cs * (0.12 + 0.14 * depth);
-  dark += brand * cs * 0.06 * (1.0 - vy);
-  dark += mix(cyan, brand, 0.35) * min(rings, 1.0) * 0.3;
-  dark += cyan * glow * 0.1 + vec3(0.6, 0.95, 1.0) * beam * 0.06;
-  col = mix(col, dark, uDark);
+  vec3 col = scene(p, vy, disp, rings, glow);
+  float beam = exp(-pow((uv.x - 0.7 - (uv.y - 1.0) * 0.25) * 3.0, 2.0)) * smoothstep(0.1, 1.0, uv.y) * (1.0 - uLake);
+  col += vec3(0.55, 1.0, 0.95) * beam * 0.07;
+
+  // Стеклянная капля: преломляет и увеличивает воду за собой
+  if (uDrop.z > 0.0) {
+    vec2 du = (uv - uDrop.xy) / uDrop.zw;
+    if (du.x > -0.1 && du.x < 1.1 && du.y > -0.25 && du.y < 1.1) {
+      float e = 0.012;
+      float a = texture2D(uMask, du).a;
+      vec2 n = vec2(texture2D(uMask, du + vec2(e, 0.0)).a - texture2D(uMask, du - vec2(e, 0.0)).a,
+                    texture2D(uMask, du + vec2(0.0, e)).a - texture2D(uMask, du - vec2(0.0, e)).a);
+      float inside = smoothstep(0.4, 0.6, a);
+      // пятно сфокусированного света под каплей
+      float spot = exp(-pow(length((du - vec2(0.5, -0.06)) * vec2(1.7, 7.0)), 2.0));
+      col += vec3(0.25, 1.0, 0.85) * spot * 0.22;
+      if (inside > 0.0) {
+        vec2 dc = vec2((uDrop.x + uDrop.z * 0.5) * aspect, uDrop.y + uDrop.w * 0.38);
+        vec2 pr = dc + (p - dc) * 0.5 - n * 0.9 * uDrop.z * aspect;
+        vec3 glass = scene(pr, vy, disp * 0.5, rings, glow) * 1.5;
+        glass = mix(glass, vec3(0.75, 1.0, 0.97), smoothstep(0.55, 1.0, du.y) * 0.18);      // светлая верхушка
+        glass = mix(glass, vec3(0.008, 0.694, 0.251), smoothstep(0.45, 0.0, du.y) * 0.45);  // зелень Freedom у дна
+        float rim = smoothstep(0.3, 0.5, a) - smoothstep(0.5, 0.8, a);
+        glass += vec3(0.8, 1.0, 0.98) * rim * 0.55;                                           // светлый край стекла
+        float spec = exp(-pow(length((du - vec2(0.33, 0.62)) * vec2(5.0, 3.2)), 2.0));
+        glass += vec3(1.0) * spec * 0.55;                                                     // блик
+        col = mix(col, glass, inside);
+      }
+    }
+  }
+
   // зерно, чтобы не было бандинга
-  col += (hash(gl_FragCoord.xy + uTime) - 0.5) * 0.012;
-
+  col += (hash(gl_FragCoord.xy + uTime) - 0.5) * 0.014;
   gl_FragColor = vec4(col, 1.0);
 }
 `;
 
-export function initWater(container, { reducedMotion, lake = false } = {}) {
+// Маска формы капли: тот же путь, что у SVG «данных», размытый — из размытия шейдер берёт нормали
+const DROP_PATH = 'M160 14C222 96 290 170 290 262a130 130 0 0 1-260 0C30 170 98 96 160 14z';
+function dropMask() {
+  const w = 256, h = 336, pad = 16;
+  const c = document.createElement('canvas');
+  c.width = w + pad * 2; c.height = h + pad * 2;
+  const ctx = c.getContext('2d');
+  ctx.filter = 'blur(7px)';
+  ctx.translate(pad, pad);
+  ctx.scale(w / 320, h / 420);
+  ctx.fillStyle = '#fff';
+  ctx.fill(new Path2D(DROP_PATH));
+  return { canvas: c, pad: pad / (w + pad * 2), padY: pad / (h + pad * 2) };
+}
+
+export function initWater(container, { reducedMotion, lake = false, dropEl = null } = {}) {
   const canvas = container.querySelector('.water__canvas');
   const section = container.parentElement; // секция принимает события указателя
   const api = { ripple() {}, ok: false };
@@ -146,8 +183,30 @@ export function initWater(container, { reducedMotion, lake = false } = {}) {
   const uPointer = gl.getUniformLocation(prog, 'uPointer');
   const uRipples = gl.getUniformLocation(prog, 'uRipples');
   gl.uniform1f(gl.getUniformLocation(prog, 'uLake'), lake ? 1 : 0);
-  // тема сайта задаётся атрибутом data-theme на <html>
-  gl.uniform1f(gl.getUniformLocation(prog, 'uDark'), document.documentElement.dataset.theme === 'dark' ? 1 : 0);
+  const uDrop = gl.getUniformLocation(prog, 'uDrop');
+  let mask = null;
+  if (dropEl) {
+    mask = dropMask();
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, mask.canvas);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.uniform1i(gl.getUniformLocation(prog, 'uMask'), 0);
+  }
+  // прямоугольник капли в долях холста (с полями маски), низ-лево — как у gl_FragCoord
+  const dropRect = () => {
+    if (!dropEl) return [0, 0, 0, 0];
+    const sr = section.getBoundingClientRect();
+    const r = dropEl.getBoundingClientRect();
+    const w = r.width / (1 - 2 * mask.pad), h = r.height / (1 - 2 * mask.padY);
+    const left = r.left - (w - r.width) / 2 - sr.left;
+    const bottom = sr.bottom - (r.bottom + (h - r.height) / 2);
+    return [left / sr.width, bottom / sr.height, w / sr.width, h / sr.height];
+  };
 
   const ripples = new Float32Array(MAX_RIPPLES * 4);
   let rIdx = 0;
@@ -218,6 +277,7 @@ export function initWater(container, { reducedMotion, lake = false } = {}) {
     gl.uniform1f(uTime, now());
     gl.uniform2f(uPointer, pointer.x, pointer.y);
     gl.uniform4fv(uRipples, ripples);
+    gl.uniform4f(uDrop, ...dropRect());
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     raf = requestAnimationFrame(frame);
   };

@@ -10,7 +10,8 @@ import { t, applyI18n, initLangSwitch, onLangChange } from './i18n/index.js';
 import { $, $$, reducedMotion } from './lib/dom.js';
 import { initHeader, setActiveNav } from './modules/header.js';
 import { initProgress } from './modules/progress.js';
-import { initReveal, initButtonRipples, initSurfaceLight, initCursor } from './modules/effects.js';
+import { initReveal, initButtonRipples, initSurfaceLight, initCursor, initRippleText } from './modules/effects.js';
+import { initTraveler } from './modules/traveler.js';
 import { renderFaq, initMarquee, initRain, applyConfig } from './modules/content.js';
 import { initWater } from './modules/water.js';
 import { initHero } from './modules/hero.js';
@@ -63,8 +64,10 @@ applyI18n();
 
 // Визуальные эффекты
 initReveal();
-const water = initWater($('.hero .water'), { reducedMotion });
-initWater($('.final .water'), { reducedMotion, lake: true });
+const water = initWater($('.hero .water'), { reducedMotion, dropEl: $('[data-glass-drop]') });
+const lake = initWater($('.final .water'), { reducedMotion, lake: true });
+initTraveler({ lake });
+initRippleText();
 initHero(water);
 initButtonRipples();
 initSurfaceLight();

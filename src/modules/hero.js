@@ -14,8 +14,8 @@ function initDropParallax(hero, drop) {
   if (finePointer) {
     hero.addEventListener('pointermove', (e) => {
       const r = hero.getBoundingClientRect();
-      tx = ((e.clientX - r.left) / r.width - 0.5) * 32;
-      ty = ((e.clientY - r.top) / r.height - 0.5) * 24;
+      tx = ((e.clientX - r.left) / r.width - 0.5) * 48;
+      ty = ((e.clientY - r.top) / r.height - 0.5) * 32;
       kick();
     }, { passive: true });
   } else {
@@ -65,6 +65,6 @@ function initFallingDot(hero, water) {
 export function initHero(water) {
   if (reducedMotion) return;
   const hero = $('.hero');
-  initDropParallax(hero, $('.drop-hero', hero));
+  initDropParallax(hero, $('.glass-drop', hero));
   initFallingDot(hero, water);
 }

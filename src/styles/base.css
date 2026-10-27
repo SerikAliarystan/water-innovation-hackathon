@@ -47,33 +47,33 @@ p { margin: 0; }
 .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
 .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
-/* Типографика */
+/* Типографика: плакатный узкий гротеск капсом + контрастный курсив для акцентов */
 .h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(36px, 5vw, 72px);
-  line-height: 1.04;
-  letter-spacing: -0.04em;
+  font-weight: 800;
+  font-size: clamp(52px, 7.4vw, 128px);
+  line-height: 0.88;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
   text-wrap: balance;
 }
-/* акцент в заголовках: «текучий» курсив с переливом воды */
-.h2 em, .final__title em, .hero__accent em {
-  font-family: var(--font-accent); font-style: italic; font-weight: 600; letter-spacing: -0.01em;
-  font-size: 1.12em; line-height: 0.9; padding-right: 0.05em;
-  background: linear-gradient(95deg, var(--aqua) 0%, var(--aqua-hi) 45%, var(--brand) 100%);
+.h2 em, .final__title em, .hero__accent {
+  font-family: var(--font-accent); font-style: italic; font-weight: 400; text-transform: none;
+  font-size: 0.86em; letter-spacing: -0.02em; line-height: 0.9; padding-right: 0.06em;
+  font-variation-settings: 'opsz' 1200;
+  background: linear-gradient(100deg, var(--aqua-2) 0%, var(--aqua) 40%, var(--brand) 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 h1, h2, h3, p, li, dd { hyphens: manual; overflow-wrap: break-word; }
 p, li, dd { text-wrap: pretty; }
 .sec-lead {
-  max-width: 54ch; margin-top: 22px;
+  max-width: 50ch; margin-top: 22px;
   font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; color: var(--text-2); text-wrap: pretty;
 }
-/* метка над заголовком: обычный гротеск, без капса */
 .kicker {
   display: inline-flex; align-items: center; gap: 10px;
-  font-size: 15px; font-weight: 600; letter-spacing: 0; color: var(--brand-deep);
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.02em; color: var(--aqua);
 }
 .kicker__dot {
   width: 9px; height: 11px; flex: none; background: currentColor;

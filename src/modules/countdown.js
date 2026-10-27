@@ -1,6 +1,6 @@
 import { now, currentStage, DATES, astana } from '../config.js';
 import { t, getLang, onLangChange } from '../i18n/index.js';
-import { $$ } from '../lib/dom.js';
+import { $, $$ } from '../lib/dom.js';
 
 // Таймер с «капающими» цифрами + шкала этапов. Один компонент — в блоке отсчёта и в финале.
 
@@ -89,7 +89,47 @@ function updateTrack(list) {
   });
 }
 
+// Резервуар: уровень воды — доля прошедшего времени от запуска сайта до закрытия приёма заявок
+const LAUNCH = astana(2026, 10, 20);
+function initTank(reducedMotion) {
+  const tank = $('[data-tank]');
+  if (!tank) return () => {};
+  const section = tank.parentElement;
+  let visible = false;
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(section);
+  return () => {
+    const p = Math.min(1, Math.max(0, (now() - LAUNCH) / (DATES.regClose - LAUNCH)));
+    tank.style.setProperty('--level', `${(12 + p * 70).toFixed(2)}%`);
+    if (reducedMotion || !visible || document.hidden) return;
+    // капля с цифры секунд падает на поверхность воды
+    const digit = $('[data-timer] [data-u="seconds"]', section);
+    if (!digit) return;
+    const sr = section.getBoundingClientRect();
+    const dr = digit.getBoundingClientRect();
+    const x = dr.left - sr.left + dr.width * (0.2 + Math.random() * 0.6);
+    const y0 = dr.bottom - sr.top;
+    const surface = sr.height - tank.getBoundingClientRect().height;
+    if (surface <= y0) return;
+    const d = document.createElement('span');
+    d.className = 'tank-drop';
+    d.style.left = `${x}px`;
+    d.style.top = `${y0}px`;
+    section.append(d);
+    d.animate([{ transform: 'translateY(0) scaleY(1)' }, { transform: `translateY(${surface - y0}px) scaleY(1.4)` }],
+      { duration: 700, easing: 'cubic-bezier(.55,0,.9,.4)', fill: 'forwards' }).finished.then(() => {
+      d.remove();
+      const ring = document.createElement('span');
+      ring.className = 'tank-ring';
+      ring.style.left = `${x}px`;
+      ring.style.top = `${surface - 6}px`;
+      section.append(ring);
+      ring.addEventListener('animationend', () => ring.remove(), { once: true });
+    });
+  };
+}
+
 export function initCountdown({ onStage, reducedMotion }) {
+  const tankTick = initTank(reducedMotion);
   const timers = $$('[data-timer]').map((el) => ({ el, ...buildTimer(el) }));
   const tracks = $$('[data-stages]');
   tracks.forEach(renderTrack);
@@ -113,6 +153,7 @@ export function initCountdown({ onStage, reducedMotion }) {
       el.setAttribute('aria-label', `${t(`stage.${stage.id}.label`)}: ${parts.days} ${plural('cd.days', parts.days)}, ${parts.hours} ${plural('cd.hours', parts.hours)}, ${parts.minutes} ${plural('cd.minutes', parts.minutes)}`);
     });
     // шкала этапов меняется медленно — обновляем раз в минуту
+    tankTick();
     const minute = Math.floor(now() / 60000);
     if (force || minute !== lastMinute) { lastMinute = minute; tracks.forEach(updateTrack); }
   };

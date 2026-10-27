@@ -11,6 +11,7 @@ export function initProgress({ onSection }) {
   const topFill = $('.topbar__fill');
   const agenda = $('.agenda');
   const flow = $('.agenda__flow');
+  const depth = $('[data-depth]');
   let activeId = null;
 
   function buildMarks() {
@@ -48,6 +49,12 @@ export function initProgress({ onSection }) {
     const p = docH > 0 ? scrollY / docH : 0;
     railFill.style.transform = `scaleY(${p})`;
     topFill.style.transform = `scaleX(${p})`;
+    // глубиномер: погружение к середине страницы и всплытие к озеру финала
+    if (depth) {
+      const m = Math.round(Math.sin(Math.min(p / 0.88, 1) * Math.PI) * 128); // к озеру — всплытие
+      depth.textContent = m ? `−${m} ${t('depth.unit')}` : `0 ${t('depth.unit')}`;
+      depth.style.top = `${p * 100}%`;
+    }
 
     // активный блок — тот, что пересёк линию на 40% высоты экрана
     const probe = innerHeight * 0.4;
