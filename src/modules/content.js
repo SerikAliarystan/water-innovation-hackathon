@@ -1,6 +1,5 @@
 import { $, $$, reducedMotion } from '../lib/dom.js';
 import { CONFIG } from '../config.js';
-import { onLangChange } from '../i18n/index.js';
 
 // Генерируемый контент: FAQ, бегущая строка, капли в блоке отсчёта, контакты из конфига
 
@@ -42,9 +41,6 @@ export function initRain() {
 }
 
 export function applyConfig() {
-  const fill = () => $$('[data-prize]').forEach((el) => { el.textContent = CONFIG.prize; });
-  fill();
-  onLangChange(fill);
   const mail = $('[data-contact-email]');
   if (mail) { mail.href = `mailto:${CONFIG.contactEmail}`; $('span', mail).textContent = CONFIG.contactEmail; }
   const tg = $('[data-contact-tg]');

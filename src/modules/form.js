@@ -5,7 +5,7 @@ import { esc } from '../lib/dom.js';
 // Форма регистрации команды: 4 шага, валидация, 3–5 участников, защита от двойной отправки.
 // Пользовательские значения всегда проходят через esc() перед вставкой в разметку.
 
-const MIN_MEMBERS = 3;
+const MIN_MEMBERS = 2; // хакатон командный: от 2 до 5 человек, включая капитана
 const MAX_MEMBERS = 5;
 const IDEA_MAX = 1000;
 const TRACKS = ['track.1', 'track.2', 'form.track.3full', 'form.track.4full', 'track.5', 'track.6', 'form.track.7'];
@@ -16,7 +16,7 @@ const emptyMember = () => ({ name: '', email: '', age: '', org: '', role: '' });
 const freshState = () => ({
   step: 1,
   team: { teamName: '', captainName: '', captainEmail: '', phone: '', city: '' },
-  members: [emptyMember(), emptyMember(), emptyMember()], // [0] — капитан
+  members: [emptyMember(), emptyMember()], // [0] — капитан
   idea: { projectName: '', track: '', idea: '', link: '' },
   consentData: false,
   consentRules: false,
@@ -43,7 +43,7 @@ export function initForm({ announce }) {
   const age = (v) => {
     if (req(v)) return 'err.required';
     const n = Number(v);
-    return Number.isInteger(n) && n >= 16 && n <= 35 ? null : 'err.age';
+    return Number.isInteger(n) && n >= 16 && n <= 120 ? null : 'err.age';
   };
   const url = (v) => {
     const s = String(v).trim();
@@ -148,7 +148,7 @@ export function initForm({ announce }) {
             ${field({ id: `m${i}.email`, label: t('form.m.email'), value: m.email, type: 'email', inputmode: 'email', autocomplete: 'off' })}
           </div>`}
         <div class="grid-2">
-          ${field({ id: `m${i}.age`, label: t('form.m.age'), value: m.age, type: 'number', inputmode: 'numeric', extra: 'min="16" max="35" step="1"' })}
+          ${field({ id: `m${i}.age`, label: t('form.m.age'), value: m.age, type: 'number', inputmode: 'numeric', extra: 'min="16" step="1"' })}
           ${field({ id: `m${i}.role`, label: t('form.m.role'), value: m.role, required: false, placeholder: t('form.m.role.ph'), extra: 'maxlength="80"' })}
         </div>
         ${field({ id: `m${i}.org`, label: t('form.m.org'), value: m.org, required: false, extra: 'maxlength="120"' })}

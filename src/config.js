@@ -1,9 +1,6 @@
 // Настройки, которые меняет организатор. Пересборка: npm run build.
 
 export const CONFIG = {
-  // Призовой фонд — подставляется в баннер и карточку «Почему участвовать»
-  prize: '[X]',
-
   // URL веб-приложения Google Apps Script (см. backend/README.md).
   // Пусто — демо-режим: заявки сохраняются только в браузере (localStorage).
   submitEndpoint: '',

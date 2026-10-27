@@ -70,9 +70,9 @@ function validate(d) {
   if (!d || !d.team || !Array.isArray(d.members)) return 'bad payload';
   const t = d.team;
   if (!t.teamName || !t.captainName || !email.test(t.captainEmail) || !t.phone || !t.city) return 'team fields';
-  if (d.members.length < 3 || d.members.length > 5) return 'team size';
+  if (d.members.length < 2 || d.members.length > 5) return 'team size';
   for (const m of d.members) {
-    if (!m.name || !email.test(m.email) || !(m.age >= 16 && m.age <= 35)) return 'member fields';
+    if (!m.name || !email.test(m.email) || !(m.age >= 16)) return 'member fields';
   }
   if (!d.consents || !d.consents.personalData || !d.consents.rules) return 'consents';
   if (d.idea && d.idea.idea && d.idea.idea.length > 1000) return 'idea too long';

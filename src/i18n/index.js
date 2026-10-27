@@ -1,5 +1,4 @@
 import { dict, LANGS } from './strings.js';
-import { CONFIG } from '../config.js';
 import { $$, esc } from '../lib/dom.js';
 
 // Язык выставляется инлайн-скриптом в <head> до отрисовки; здесь — только чтение и смена
@@ -24,7 +23,7 @@ export const getLang = () => lang;
 
 export function t(key) {
   const v = dict[lang][key] ?? dict.ru[key] ?? key;
-  return typo(v.replace('{prize}', CONFIG.prize));
+  return typo(v);
 }
 
 // Подписка на смену языка: модули перерисовывают свои динамические части

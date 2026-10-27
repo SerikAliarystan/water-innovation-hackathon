@@ -1,5 +1,5 @@
 import { now, currentStage, DATES, astana } from '../config.js';
-import { t, onLangChange } from '../i18n/index.js';
+import { t, getLang, onLangChange } from '../i18n/index.js';
 import { $$ } from '../lib/dom.js';
 
 // Таймер с «капающими» цифрами + шкала этапов. Один компонент — в блоке отсчёта и в финале.
@@ -15,6 +15,16 @@ const TRACK = [
   { id: 'demo', from: DATES.demoDay, to: DATES.demoDayEnd, name: 'p.7.t', date: 'p.7.d' },
 ];
 
+// Подписи склоняются: «1 день, 2 дня, 5 дней». Формы в переводе через «|»: one|few|many (ru), one|other (en)
+const ORDER = { ru: ['one', 'few', 'many'], en: ['one', 'other'] };
+function plural(key, n) {
+  const forms = t(key).split('|');
+  if (forms.length === 1) return forms[0]; // в казахском форма не меняется
+  const lang = getLang();
+  const idx = (ORDER[lang] || ['one', 'other']).indexOf(new Intl.PluralRules(lang).select(n));
+  return forms[Math.max(0, idx)] ?? forms[forms.length - 1];
+}
+
 function split(ms) {
   const s = Math.max(0, Math.floor(ms / 1000)); // никогда не отрицательный
   return { days: Math.floor(s / 86400), hours: Math.floor((s % 86400) / 3600), minutes: Math.floor((s % 3600) / 60), seconds: s % 60 };
@@ -24,9 +34,12 @@ function buildTimer(el) {
   el.innerHTML = UNITS.map((u) => `
     <div class="timer__unit">
       <span class="timer__digits" data-u="${u}"></span>
-      <span class="timer__label" data-i18n="cd.${u}"></span>
+      <span class="timer__label" data-label="${u}"></span>
     </div>`).join('');
-  return Object.fromEntries(UNITS.map((u) => [u, el.querySelector(`[data-u="${u}"]`)]));
+  return {
+    digits: Object.fromEntries(UNITS.map((u) => [u, el.querySelector(`[data-u="${u}"]`)])),
+    labels: Object.fromEntries(UNITS.map((u) => [u, el.querySelector(`[data-label="${u}"]`)])),
+  };
 }
 
 function setDigits(box, str, animate) {
@@ -77,7 +90,7 @@ function updateTrack(list) {
 }
 
 export function initCountdown({ onStage, reducedMotion }) {
-  const timers = $$('[data-timer]').map((el) => ({ el, digits: buildTimer(el) }));
+  const timers = $$('[data-timer]').map((el) => ({ el, ...buildTimer(el) }));
   const tracks = $$('[data-stages]');
   tracks.forEach(renderTrack);
   let stageId = null;
@@ -91,9 +104,13 @@ export function initCountdown({ onStage, reducedMotion }) {
       onStage?.(stage);
     }
     const parts = split(stage.frozen ? 0 : stage.target - now());
-    timers.forEach(({ el, digits }) => {
-      UNITS.forEach((u) => setDigits(digits[u], String(parts[u]).padStart(2, '0'), !reducedMotion));
-      el.setAttribute('aria-label', `${t(`stage.${stage.id}.label`)}: ${parts.days} ${t('cd.days')}, ${parts.hours} ${t('cd.hours')}, ${parts.minutes} ${t('cd.minutes')}`);
+    timers.forEach(({ el, digits, labels }) => {
+      UNITS.forEach((u) => {
+        setDigits(digits[u], String(parts[u]).padStart(2, '0'), !reducedMotion);
+        const label = plural(`cd.${u}`, parts[u]);
+        if (labels[u].textContent !== label) labels[u].textContent = label;
+      });
+      el.setAttribute('aria-label', `${t(`stage.${stage.id}.label`)}: ${parts.days} ${plural('cd.days', parts.days)}, ${parts.hours} ${plural('cd.hours', parts.hours)}, ${parts.minutes} ${plural('cd.minutes', parts.minutes)}`);
     });
     // шкала этапов меняется медленно — обновляем раз в минуту
     const minute = Math.floor(now() / 60000);
