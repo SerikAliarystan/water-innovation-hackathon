@@ -70,7 +70,7 @@ function validate(d) {
   if (!d || !d.team || !Array.isArray(d.members)) return 'bad payload';
   const t = d.team;
   if (!t.teamName || !t.captainName || !email.test(t.captainEmail) || !t.phone || !t.city) return 'team fields';
-  if (d.members.length < 2 || d.members.length > 5) return 'team size';
+  if (d.members.length < 1 || d.members.length > 5) return 'team size';
   for (const m of d.members) {
     if (!m.name || !email.test(m.email) || !(m.age >= 16)) return 'member fields';
   }

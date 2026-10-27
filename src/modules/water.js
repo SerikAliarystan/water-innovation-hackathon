@@ -11,7 +11,11 @@ void main() { gl_Position = vec4(aPos, 0.0, 1.0); }
 `;
 
 const FRAG = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
 precision mediump float;
+#endif
 uniform vec2 uRes;
 uniform float uTime;
 uniform vec2 uPointer;
@@ -36,7 +40,7 @@ float caustic(vec2 p, float t) {
     i = p + vec2(cos(tt - i.x) + sin(tt + i.y), sin(tt - i.y) + cos(tt + i.x));
     c += 1.0 / length(vec2(p.x / (sin(i.x + tt) / inten), p.y / (cos(i.y + tt) / inten)));
   }
-  c /= 4.0;
+  c = clamp(c / 4.0, 0.0, 4.0); // без переполнения в mediump (иначе NaN — чёрные пиксели)
   c = 1.17 - pow(c, 1.4);
   return clamp(pow(abs(c), 8.0), 0.0, 1.0);
 }
