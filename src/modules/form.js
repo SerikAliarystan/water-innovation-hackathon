@@ -5,7 +5,7 @@ import { esc } from '../lib/dom.js';
 // Форма регистрации команды: 4 шага, валидация, 3–5 участников, защита от двойной отправки.
 // Пользовательские значения всегда проходят через esc() перед вставкой в разметку.
 
-const MIN_MEMBERS = 2; // хакатон командный: от 2 до 5 человек, включая капитана
+const MIN_MEMBERS = 1; // минимального состава нет: от 1 до 5 человек, включая капитана
 const MAX_MEMBERS = 5;
 const IDEA_MAX = 1000;
 const TRACKS = ['track.1', 'track.2', 'form.track.3full', 'form.track.4full', 'track.5', 'track.6', 'form.track.7'];
@@ -16,7 +16,7 @@ const emptyMember = () => ({ name: '', email: '', age: '', org: '', role: '' });
 const freshState = () => ({
   step: 1,
   team: { teamName: '', captainName: '', captainEmail: '', phone: '', city: '' },
-  members: [emptyMember(), emptyMember()], // [0] — капитан
+  members: [emptyMember()], // [0] — капитан
   idea: { projectName: '', track: '', idea: '', link: '' },
   consentData: false,
   consentRules: false,

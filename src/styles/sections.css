@@ -284,7 +284,7 @@
 .final__inner { display: flex; flex-direction: column; align-items: center; }
 .final__title {
   margin: 22px 0 0; max-width: 16ch; font-family: var(--font-display); font-weight: 900; text-transform: uppercase; letter-spacing: -0.005em; line-height: 0.86;
-  font-size: clamp(64px, 11vw, 200px); text-wrap: balance;
+  font-size: clamp(52px, 8vw, 150px); text-wrap: balance;
 }
 .final .sec-lead { margin-inline: auto; }
 .final__cta { display: grid; justify-items: center; gap: 26px; margin-top: clamp(36px, 4vw, 56px); }
