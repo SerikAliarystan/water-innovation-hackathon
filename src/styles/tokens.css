@@ -40,7 +40,7 @@
   --danger: #c53b37;
 
   /* шрифты: узкий плакатный гротеск + контрастный курсив + текст + моно для цифр */
-  --font-display: 'Sofia Sans Extra Condensed', 'Oswald', 'Arial Narrow', sans-serif;
+  --font-display: 'Fira Sans Extra Condensed', 'Oswald', 'Arial Narrow', sans-serif; /* полный казахский набор */
   --font-accent: 'Playfair', 'Playfair Display', Georgia, serif;
   --font-body: 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --font-mono: 'Fragment Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;

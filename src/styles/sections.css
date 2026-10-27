@@ -54,7 +54,7 @@
 @keyframes line-in { from { transform: translateY(105%); } }
 .line--1 {
   font-family: var(--font-display); font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em;
-  font-size: clamp(76px, min(14.5vw, 25vh), 250px); color: var(--text);
+  font-size: clamp(64px, min(11.6vw, 21vh), 210px); color: var(--text);
 }
 .line--2 { margin-top: -0.02em; font-size: clamp(64px, min(11vw, 19vh), 196px); }
 .hero__accent { font-size: 1em; padding-right: 0.08em; }
